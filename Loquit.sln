@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34701.34
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Loquit", "Loquit\Loquit.csproj", "{CC3C3A1E-429F-4340-94CE-984CAFD0F86D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Loquit.Web", "Loquit\Loquit.Web.csproj", "{CC3C3A1E-429F-4340-94CE-984CAFD0F86D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Loquit.Data", "Loquit.Data\Loquit.Data.csproj", "{6DAEECF6-EA09-44E0-9556-D9F327C900E6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{CC3C3A1E-429F-4340-94CE-984CAFD0F86D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CC3C3A1E-429F-4340-94CE-984CAFD0F86D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CC3C3A1E-429F-4340-94CE-984CAFD0F86D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6DAEECF6-EA09-44E0-9556-D9F327C900E6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6DAEECF6-EA09-44E0-9556-D9F327C900E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6DAEECF6-EA09-44E0-9556-D9F327C900E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6DAEECF6-EA09-44E0-9556-D9F327C900E6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
