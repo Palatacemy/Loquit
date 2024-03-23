@@ -10,7 +10,7 @@ namespace Loquit.Data.Entities
     public class Comment : BaseEntity
     {
         public string Text { get; set; }
-        public AppUser? Commenter { get; set; }
+        public int CommenterId { get; set; }
         public DateTime TimeOfCommenting { get; set; }
 
     }

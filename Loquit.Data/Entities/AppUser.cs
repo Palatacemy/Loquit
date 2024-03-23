@@ -24,7 +24,7 @@ namespace Loquit.Data.Entities
         public ICollection<Post>? LikedPosts { get; set; }
         public ICollection<Post>? DislikedPosts { get; set; }
         public ICollection<Comment>? Comments { get; set; }
-        public ICollection<AppUser>? Friends { get; set; }
-        public ICollection<AppUser>? Blacklist { get; set; }
+        public int? FriendsIds { get; set; }
+        public int? BlacklistIds { get; set; }
     }
 }

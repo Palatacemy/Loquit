@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Loquit.Data.Entities.Abstractions
 {
-    public abstract class BaseChat : BaseEntity
+    public abstract class BaseMember : BaseEntity 
     {
-        public List<BaseMember> Members { get; set; }
-        public ICollection<BaseMessage>? Messages { get; set; }
+        public int UserId { get; set; }
+        public int UserIdInChat { get; set; }
     }
 }
