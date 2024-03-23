@@ -9,6 +9,10 @@ namespace Loquit.Data.Entities
 {
     public class Post : BaseEntity
     {
+        public Post()
+        {
+            Comments = new HashSet<Comment>();
+        }
         public string Title { get; set; }
         public string BodyText { get; set; }
         public string PictureUrl { get; set; }
@@ -16,7 +20,7 @@ namespace Loquit.Data.Entities
         public DateTime TimeOfPosting { get; set; }
         public int Likes { get; set; }
         public int Dislikes { get; set; }
-        public List<Comment>? Comments { get; set; }
+        public ICollection<Comment>? Comments { get; set; }
 
     }
 }

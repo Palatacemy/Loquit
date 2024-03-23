@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Loquit.Data.Entities.ChatTypes
 {
-    internal class GroupChat : BaseChat
+    public class GroupChat : BaseChat
     {
 
     }

@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Loquit.Data.Entities.Abstractions;
 
-namespace Loquit.Data.Entities.Abstractions
+namespace Loquit.Data.Entities
 {
-    public abstract class BaseMember : BaseEntity 
+    public class BaseMember : BaseEntity
     {
         public int UserId { get; set; }
-        public int UserIdInChat { get; set; }
     }
 }
