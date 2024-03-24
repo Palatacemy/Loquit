@@ -18,7 +18,6 @@ namespace Loquit.Data.Entities
             SavedPosts = new HashSet<Post>();
             LikedPosts = new HashSet<Post>();
             DislikedPosts = new HashSet<Post>();
-            Comments = new HashSet<Comment>();
 
         }
         public string FirstName { get; set; }
@@ -32,7 +31,6 @@ namespace Loquit.Data.Entities
         public ICollection<Post>? SavedPosts { get; set; }
         public ICollection<Post>? LikedPosts { get; set; }
         public ICollection<Post>? DislikedPosts { get; set; }
-        public ICollection<Comment>? Comments { get; set; }
         public int? FriendsIds { get; set; }
         public int? BlacklistIds { get; set; }
     }
