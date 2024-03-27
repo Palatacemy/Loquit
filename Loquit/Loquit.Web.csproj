@@ -19,6 +19,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Loquit.Data\Loquit.Data.csproj" />
+    <ProjectReference Include="..\Loquit.Services\Loquit.Services.csproj" />
   </ItemGroup>
 
 </Project>
