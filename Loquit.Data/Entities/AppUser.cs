@@ -26,11 +26,11 @@ namespace Loquit.Data.Entities
         public DateOnly DateOfBirth { get; set; }
         public string Description { get; set; }
         public string ProfilePictureUrl { get; set; }
-        public ICollection<BaseChat>? Chats { get; set; }
-        public ICollection<Post>? Posts { get; set; }
-        public ICollection<Post>? SavedPosts { get; set; }
-        public ICollection<Post>? LikedPosts { get; set; }
-        public ICollection<Post>? DislikedPosts { get; set; }
+        public virtual ICollection<BaseChat>? Chats { get; set; }
+        public virtual ICollection<Post>? Posts { get; set; }
+        public virtual ICollection<Post>? SavedPosts { get; set; }
+        public virtual ICollection<Post>? LikedPosts { get; set; }
+        public virtual ICollection<Post>? DislikedPosts { get; set; }
         public int? FriendsIds { get; set; }
         public int? BlacklistIds { get; set; }
     }
