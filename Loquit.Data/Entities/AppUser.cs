@@ -18,7 +18,10 @@ namespace Loquit.Data.Entities
             SavedPosts = new HashSet<Post>();
             LikedPosts = new HashSet<Post>();
             DislikedPosts = new HashSet<Post>();
-
+            CategoryPreferences = [0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3];
+            EvaluationPreferences = [0.3, 0.3, 0.3, 0.3, 0.3];
+            AllowNsfw = false;
+            ColorThemeId = 0;
         }
         public string FirstName { get; set; }
         public string LastName { get; set; }
@@ -26,12 +29,16 @@ namespace Loquit.Data.Entities
         public DateOnly DateOfBirth { get; set; }
         public string Description { get; set; }
         public string ProfilePictureUrl { get; set; }
-        public ICollection<BaseChat>? Chats { get; set; }
-        public ICollection<Post>? Posts { get; set; }
-        public ICollection<Post>? SavedPosts { get; set; }
-        public ICollection<Post>? LikedPosts { get; set; }
-        public ICollection<Post>? DislikedPosts { get; set; }
+        public virtual ICollection<BaseChat>? Chats { get; set; }
+        public virtual ICollection<Post>? Posts { get; set; }
+        public virtual ICollection<Post>? SavedPosts { get; set; }
+        public virtual ICollection<Post>? LikedPosts { get; set; }
+        public virtual ICollection<Post>? DislikedPosts { get; set; }
         public int? FriendsIds { get; set; }
         public int? BlacklistIds { get; set; }
+        public double[] CategoryPreferences { get; set; }
+        public double[] EvaluationPreferences { get; set; }
+        public bool AllowNsfw { get; set; }
+
     }
 }

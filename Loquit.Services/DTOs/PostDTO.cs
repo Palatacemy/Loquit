@@ -16,5 +16,8 @@ namespace Loquit.Services.DTOs
         public int Likes { get; set; }
         public int Dislikes { get; set; }
         public List<CommentDTO>? Comments { get; set; }
+        public int CategoryId { get; set; }
+        public bool IsSpoiler { get; set; }
+        public bool IsNsfw { get; set; }
     }
 }

@@ -9,6 +9,6 @@ namespace Loquit.Services.DTOs.ChatTypesDTOs
 {
     public class GroupChatDTO : BaseChatDTO
     {
-
+        public DateOnly DateOfCreation { get; set; }
     }
 }
