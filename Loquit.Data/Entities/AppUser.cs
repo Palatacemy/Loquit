@@ -39,6 +39,6 @@ namespace Loquit.Data.Entities
         public double[] CategoryPreferences { get; set; }
         public double[] EvaluationPreferences { get; set; }
         public bool AllowNsfw { get; set; }
-
+        public int ColorThemeId { get; set; }
     }
 }
