@@ -12,6 +12,7 @@ namespace Loquit.Data.Entities
         public Post()
         {
             Comments = new HashSet<Comment>();
+            Evaluations = [0, 0, 0, 0, 0];
         }
         public string Title { get; set; }
         public string BodyText { get; set; }
@@ -21,6 +22,9 @@ namespace Loquit.Data.Entities
         public int Likes { get; set; }
         public int Dislikes { get; set; }
         public virtual ICollection<Comment>? Comments { get; set; }
-
+        public int CategoryId { get; set; }
+        public double[] Evaluations { get; set; }
+        public bool IsSpoiler { get; set; }
+        public bool IsNsfw { get; set; }
     }
 }

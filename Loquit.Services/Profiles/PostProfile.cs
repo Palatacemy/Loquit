@@ -21,15 +21,15 @@ namespace Loquit.Services.Profiles
 
 /*
  * Categories:
--food
--music
--art
--nature
--pets
--videogames
--culture
--funny
--factology
+-food           id:0
+-music          id:1
+-art            id:2
+-nature         id:3
+-pets           id:4
+-videogames     id:5
+-culture        id:6
+-funny          id:7
+-factology      id:8
 
 
 Tags:
