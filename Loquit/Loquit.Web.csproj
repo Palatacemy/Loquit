@@ -22,4 +22,8 @@
     <ProjectReference Include="..\Loquit.Services\Loquit.Services.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\img\" />
+  </ItemGroup>
+
 </Project>
