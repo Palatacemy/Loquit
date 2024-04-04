@@ -9,10 +9,8 @@ namespace Loquit.Services.Abstractions
 {
     public interface IBaseMemberService
     {
-        Task<List<BaseMemberDTO>> GetBaseMembersAsync();
-        Task<BaseMemberDTO> GetBaseMemberByIdAsync(int id);
+        Task<BaseMemberDTO> GetBaseMemberByIdAsync(int id); //For testing/debugging purposes
         Task AddBaseMemberAsync(BaseMemberDTO baseMember);
-        Task DeleteBaseMemberByIdAsync(int id);
         Task UpdateBaseMemberAsync(BaseMemberDTO baseMember);
     }
 }
