@@ -7,22 +7,24 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Loquit.Data;
 using Loquit.Data.Entities.ChatTypes;
+using Loquit.Services.Abstractions.ChatTypesAbstractions;
+using Loquit.Services.DTOs.ChatTypesDTOs;
 
 namespace Loquit.Web.Controllers
 {
     public class DirectChatsController : Controller
     {
-        private readonly ApplicationDbContext _context;
+        private readonly IDirectChatService _directChatService;
 
-        public DirectChatsController(ApplicationDbContext context)
+        public DirectChatsController(IDirectChatService directChatService)
         {
-            _context = context;
+            _directChatService = directChatService;
         }
 
         // GET: DirectChats
         public async Task<IActionResult> Index()
         {
-            return View(await _context.DirectChats.ToListAsync());
+            return View(await _directChatService.GetDirectChatsAsync());
         }
 
         // GET: DirectChats/Details/5
@@ -33,8 +35,7 @@ namespace Loquit.Web.Controllers
                 return NotFound();
             }
 
-            var directChat = await _context.DirectChats
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var directChat = await _directChatService.GetDirectChatByIdAsync(id.Value);
             if (directChat == null)
             {
                 return NotFound();
@@ -54,12 +55,11 @@ namespace Loquit.Web.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id")] DirectChat directChat)
+        public async Task<IActionResult> Create([Bind("Id")] DirectChatDTO directChat)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(directChat);
-                await _context.SaveChangesAsync();
+                await _directChatService.AddDirectChatAsync(directChat);
                 return RedirectToAction(nameof(Index));
             }
             return View(directChat);
@@ -73,7 +73,7 @@ namespace Loquit.Web.Controllers
                 return NotFound();
             }
 
-            var directChat = await _context.DirectChats.FindAsync(id);
+            var directChat = await _directChatService.GetDirectChatByIdAsync(id.Value);
             if (directChat == null)
             {
                 return NotFound();
@@ -86,7 +86,7 @@ namespace Loquit.Web.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id")] DirectChat directChat)
+        public async Task<IActionResult> Edit(int id, [Bind("Id")] DirectChatDTO directChat)
         {
             if (id != directChat.Id)
             {
@@ -97,12 +97,11 @@ namespace Loquit.Web.Controllers
             {
                 try
                 {
-                    _context.Update(directChat);
-                    await _context.SaveChangesAsync();
+                    await _directChatService.UpdateDirectChatAsync(directChat);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!DirectChatExists(directChat.Id))
+                    if (!await DirectChatExists(directChat.Id))
                     {
                         return NotFound();
                     }
@@ -124,8 +123,7 @@ namespace Loquit.Web.Controllers
                 return NotFound();
             }
 
-            var directChat = await _context.DirectChats
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var directChat = await _directChatService.GetDirectChatByIdAsync(id.Value);
             if (directChat == null)
             {
                 return NotFound();
@@ -139,19 +137,19 @@ namespace Loquit.Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var directChat = await _context.DirectChats.FindAsync(id);
+            var directChat = await _directChatService.GetDirectChatByIdAsync(id);
             if (directChat != null)
             {
-                _context.DirectChats.Remove(directChat);
+                await _directChatService.DeleteDirectChatByIdAsync(id);
             }
 
-            await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool DirectChatExists(int id)
+        private async Task<bool> DirectChatExists(int id)
         {
-            return _context.DirectChats.Any(e => e.Id == id);
+            var directChat = await _directChatService.GetDirectChatByIdAsync(id);
+            return directChat != null;
         }
     }
 }

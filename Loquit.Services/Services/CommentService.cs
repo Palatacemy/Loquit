@@ -34,7 +34,7 @@ namespace Loquit.Services.Services
             await _commentRepository.DeleteByIdAsync(id);
         }
 
-        public async Task<CommentDTO> GetCategoryByIdAsync(int id)
+        public async Task<CommentDTO> GetCommentByIdAsync(int id)
         {
             var comment = await _commentRepository.GetByIdAsync(id);
             return _mapper.Map<CommentDTO>(comment);

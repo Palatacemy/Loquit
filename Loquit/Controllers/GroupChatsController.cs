@@ -7,22 +7,25 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Loquit.Data;
 using Loquit.Data.Entities.ChatTypes;
+using Loquit.Services.Abstractions.ChatTypesAbstractions;
+using Loquit.Services.DTOs.ChatTypesDTOs;
+using Loquit.Services.Services.ChatTypesServices;
 
 namespace Loquit.Web.Controllers
 {
     public class GroupChatsController : Controller
     {
-        private readonly ApplicationDbContext _context;
+        private readonly IGroupChatService _groupChatService;
 
-        public GroupChatsController(ApplicationDbContext context)
+        public GroupChatsController(IGroupChatService groupChatService)
         {
-            _context = context;
+            _groupChatService = groupChatService;
         }
 
         // GET: GroupChats
         public async Task<IActionResult> Index()
         {
-            return View(await _context.GroupChats.ToListAsync());
+            return View(await _groupChatService.GetGroupChatsAsync());
         }
 
         // GET: GroupChats/Details/5
@@ -33,8 +36,7 @@ namespace Loquit.Web.Controllers
                 return NotFound();
             }
 
-            var groupChat = await _context.GroupChats
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var groupChat = await _groupChatService.GetGroupChatByIdAsync(id.Value);
             if (groupChat == null)
             {
                 return NotFound();
@@ -54,12 +56,11 @@ namespace Loquit.Web.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id")] GroupChat groupChat)
+        public async Task<IActionResult> Create([Bind("Id")] GroupChatDTO groupChat)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(groupChat);
-                await _context.SaveChangesAsync();
+                await _groupChatService.AddGroupChatAsync(groupChat);
                 return RedirectToAction(nameof(Index));
             }
             return View(groupChat);
@@ -73,7 +74,7 @@ namespace Loquit.Web.Controllers
                 return NotFound();
             }
 
-            var groupChat = await _context.GroupChats.FindAsync(id);
+            var groupChat = await _groupChatService.GetGroupChatByIdAsync(id.Value);
             if (groupChat == null)
             {
                 return NotFound();
@@ -86,7 +87,7 @@ namespace Loquit.Web.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id")] GroupChat groupChat)
+        public async Task<IActionResult> Edit(int id, [Bind("Id")] GroupChatDTO groupChat)
         {
             if (id != groupChat.Id)
             {
@@ -97,12 +98,11 @@ namespace Loquit.Web.Controllers
             {
                 try
                 {
-                    _context.Update(groupChat);
-                    await _context.SaveChangesAsync();
+                    await _groupChatService.UpdateGroupChatAsync(groupChat);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!GroupChatExists(groupChat.Id))
+                    if (!await GroupChatExists(groupChat.Id))
                     {
                         return NotFound();
                     }
@@ -124,8 +124,7 @@ namespace Loquit.Web.Controllers
                 return NotFound();
             }
 
-            var groupChat = await _context.GroupChats
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var groupChat = await _groupChatService.GetGroupChatByIdAsync(id.Value);
             if (groupChat == null)
             {
                 return NotFound();
@@ -139,19 +138,19 @@ namespace Loquit.Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var groupChat = await _context.GroupChats.FindAsync(id);
+            var groupChat = await _groupChatService.GetGroupChatByIdAsync(id);
             if (groupChat != null)
             {
-                _context.GroupChats.Remove(groupChat);
+                await _groupChatService.DeleteGroupChatByIdAsync(id);
             }
 
-            await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool GroupChatExists(int id)
+        private async Task<bool> GroupChatExists(int id)
         {
-            return _context.GroupChats.Any(e => e.Id == id);
+            var groupChat = await _groupChatService.GetGroupChatByIdAsync(id);
+            return groupChat != null;
         }
     }
 }

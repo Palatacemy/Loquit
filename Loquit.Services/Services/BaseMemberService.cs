@@ -21,29 +21,24 @@ namespace Loquit.Services.Services
             _mapper = mapper;
         }
 
-        public Task AddBaseMemberAsync(BaseMemberDTO baseMember)
+        public async Task AddBaseMemberAsync(BaseMemberDTO model)
         {
-            throw new NotImplementedException();
+            var baseMember = _mapper
+                .Map<BaseMember>(model);
+
+            await _baseMemberRepository.AddAsync(baseMember);
         }
 
-        public Task DeleteBaseMemberByIdAsync(int id)
+        public async Task<BaseMemberDTO> GetBaseMemberByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            var baseMember = await _baseMemberRepository.GetByIdAsync(id);
+            return _mapper.Map<BaseMemberDTO>(baseMember);
         }
 
-        public Task<BaseMemberDTO> GetBaseMemberByIdAsync(int id)
+        public async Task UpdateBaseMemberAsync(BaseMemberDTO model)
         {
-            throw new NotImplementedException();
-        }
-
-        public Task<List<BaseMemberDTO>> GetBaseMembersAsync()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task UpdateBaseMemberAsync(BaseMemberDTO baseMember)
-        {
-            throw new NotImplementedException();
+            var baseMember = _mapper.Map<BaseMember>(model);
+            await _baseMemberRepository.UpdateAsync(baseMember);
         }
     }
 }
