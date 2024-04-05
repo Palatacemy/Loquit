@@ -19,5 +19,6 @@ namespace Loquit.Services.DTOs
         public int CategoryId { get; set; }
         public bool IsSpoiler { get; set; }
         public bool IsNsfw { get; set; }
+        public bool IsEdited { get; set; }
     }
 }
