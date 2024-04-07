@@ -19,7 +19,7 @@ body {
 }
 
 .main-container {
-    max-width: 80rem;
+    max-width: 70rem;
     margin: 0 auto;
 }
 
@@ -88,10 +88,9 @@ body {
 }
 
 .post-image {
-    height: 400px !important;
+    max-height: 500px;
     width: 98%;
     margin: 1%;
-    height: 20vw;
     object-fit: cover;
     border-radius: 1rem;
 }
