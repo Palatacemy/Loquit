@@ -1,16 +1,16 @@
 ﻿:root {
-    --left: #FFF;
-    --right: #ededed;
+    --left: #1d1d1d;
+    --right: #2f2f2f;
     --bg: #7e7e7e;
     --logoA: #b2003b;
     --logoB: #700227;
     --logoC: #25000c;
     --pink: #f7deff;
-    --text: #424242;
+    --text: #dddddd;
 }
 
 body {
-    background-image: url("../img/LoquitBGLight.jpg");
+    background-image: url("../img/LoquitBGDark.jpg");
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
@@ -90,13 +90,14 @@ body {
 }
 
 .post-user {
+
 }
 
-    .post-user a {
-        font-weight: bolder;
-        color: var(--bg) !important;
-        margin: auto auto auto 10px;
-    }
+.post-user a {
+    font-weight: bolder;
+    color: var(--bg) !important;
+    margin: auto auto auto 10px;
+}
 
 .post-header-text {
     font-size: 1rem;
@@ -156,16 +157,17 @@ body {
     margin: auto;
 }
 
-    .more-btn:hover {
-        scale: 1.1;
-        transition: 0.1s;
-        background-color: var(--left);
-        border: solid var(--logoB) 2px;
-    }
+.more-btn:hover {
+    scale: 1.1;
+    transition: 0.1s;
+    background-color: var(--left);
+    border: solid var(--logoB) 2px;
 
-        .more-btn:hover .more {
-            filter: brightness(0) saturate(100%) invert(25%) sepia(86%) saturate(5830%) hue-rotate(329deg) brightness(67%) contrast(117%);
-        }
+}
+
+.more-btn:hover .more {
+    filter: brightness(0) saturate(100%) invert(25%) sepia(86%) saturate(5830%) hue-rotate(329deg) brightness(67%) contrast(117%);
+}
 
 button.show {
     scale: 1.1;
@@ -174,9 +176,9 @@ button.show {
     border: solid var(--logoB) 2px !important;
 }
 
-    button.show .more {
-        filter: brightness(0) saturate(100%) invert(25%) sepia(86%) saturate(5830%) hue-rotate(329deg) brightness(67%) contrast(117%);
-    }
+button.show .more {
+    filter: brightness(0) saturate(100%) invert(25%) sepia(86%) saturate(5830%) hue-rotate(329deg) brightness(67%) contrast(117%);
+}
 
 .more {
     width: 50%;
@@ -204,12 +206,12 @@ button.show {
     box-shadow: none !important;
 }
 
-    .dropdown-item:hover {
-        color: var(--logoA);
-        background-color: var(--right);
-    }
+.dropdown-item:hover {
+    color: var(--logoA);
+    background-color: var(--right);
+}
 
-.normal-btn:hover {
+.normal-btn:hover{
     background-color: var(--logoB) !important;
 }
 
@@ -255,9 +257,9 @@ button.show {
     background-color: var(--left);
 }
 
-    .post-search-btn:hover .btn-image {
-        filter: invert(100%);
-    }
+.post-search-btn:hover .btn-image {
+    filter: invert(100%);
+}
 
 .btn-image {
     filter: invert(50%);

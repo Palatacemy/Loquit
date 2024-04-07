@@ -1,16 +1,16 @@
 ﻿:root {
-    --left: #FFF;
-    --right: #ededed;
+    --left: #25000c;
+    --right: #4b0d1d;
     --bg: #7e7e7e;
     --logoA: #b2003b;
     --logoB: #700227;
     --logoC: #25000c;
     --pink: #f7deff;
-    --text: #424242;
+    --text: #dddddd;
 }
 
 body {
-    background-image: url("../img/LoquitBGLight.jpg");
+    background-image: url("../img/LoquitBGCrimson.jpg");
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
