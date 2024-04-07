@@ -29,6 +29,20 @@ body {
     height: 5rem;
 }
 
+::-webkit-scrollbar {
+    background: var(--left);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--logoB);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--logoC);
+}
+
+
 .main-container {
     max-width: 70rem;
     margin: 0 auto;
