@@ -38,7 +38,7 @@ body {
     width: 98%;
     margin: 0 1% 1%;
     border: solid var(--logoA) 2px;
-    border-radius: 1rem;
+    border-radius: 1rem 0 1rem 1rem ;
 }
 
 .post-header {
