@@ -8,7 +8,12 @@ namespace Loquit.Data.Entities.Abstractions
 {
     public abstract class BaseMessage : BaseEntity
     {
+        public BaseMessage()
+        {
+            IsEdited = false;
+        }
         public DateTime TimeOfSending { get; set; }
         public int SenderIdInChat { get; set; }
+        public bool IsEdited { get; set; }
     }
 }

@@ -10,5 +10,6 @@ namespace Loquit.Services.DTOs.AbstracionsDTOs
     {
         public DateTime TimeOfSending { get; set; }
         public int SenderIdInChat { get; set; }
+        public bool IsEdited { get; set; }
     }
 }

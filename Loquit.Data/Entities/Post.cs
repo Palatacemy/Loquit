@@ -26,5 +26,6 @@ namespace Loquit.Data.Entities
         public double[] Evaluations { get; set; }
         public bool IsSpoiler { get; set; }
         public bool IsNsfw { get; set; }
+        public bool IsEdited { get; set; }
     }
 }
