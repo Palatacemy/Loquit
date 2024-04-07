@@ -9,8 +9,9 @@
 
 body {
     background-image: url("../img/LoquitBGLight.jpg");
-    background-size: contain;
     background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
 }
 
 #logo {
@@ -18,14 +19,24 @@ body {
 }
 
 .main-container {
-    width: 80rem;
+    max-width: 80rem;
     margin: 0 auto;
 }
+
+/* ------ left container ------ */
 
 .left-container {
     width: 75%;
     background-color: var(--left);
 }
+
+@media (max-width: 1024px) {
+    .left-container {
+        width: 100%;
+    }
+}
+
+
 
 .lr-container-content {
     margin: 7rem auto auto auto;
@@ -46,32 +57,57 @@ body {
     margin: 1% 1% 0;
 }
 
-post-header-text {
-    font-size: 2rem;
+.post-header-text {
+    font-size: 1rem;
     font-weight: 400;
+    width: 70%;
+    margin: auto 0;
 }
 
 .post-header-options {
     border-left: solid var(--logoA) 1px;
     padding-left: 0.5rem;
+    width: 30%;
 }
 
 .post-header-option {
     margin: auto;
+    text-align: center;
+    font-size: 1rem;
+}
+
+.like,
+.dislike,
+.comment {
+    width: 40%;
+    filter: brightness(0) saturate(100%) invert(50%) sepia(1%) saturate(0%) brightness(98%) contrast(98%);
+}
+
+.dislike {
+    transform: rotateX(180deg);
 }
 
 .post-image {
-    width: 98%; 
+    height: 400px !important;
+    width: 98%;
     margin: 1%;
-    height: 20vw; 
+    height: 20vw;
     object-fit: cover;
     border-radius: 1rem;
 }
 
+/* ------ right container ------ */
 
 .right-container {
     width: 25%;
     background-color: var(--right);
+}
+
+@media (max-width: 1024px) {
+    .right-container {
+        width: 0;
+        display: none;
+    }
 }
 
 .post-search {
