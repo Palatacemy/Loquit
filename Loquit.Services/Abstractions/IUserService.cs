@@ -11,7 +11,7 @@ namespace Loquit.Services.Abstractions
     {
         Task<List<AppUser>> GetAllUsersAsync();
         Task<AppUser> GetUserByIdAsync(int id);
-        Task<List<AppUser>> GetAllUsersWithUsernameAsync(string username);
+        Task<AppUser?> GetByUsernameAsync(string username);
 
         //methods, work in progress
         /*Task AddUserAsync(AppUser user);

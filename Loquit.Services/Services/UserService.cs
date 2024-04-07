@@ -2,6 +2,8 @@
 using Loquit.Data.Entities;
 using Loquit.Data.Repositories.Abstractions;
 using Loquit.Services.Abstractions;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,22 +14,22 @@ namespace Loquit.Services.Services
 {
     public class UserService : IUserService
     {
-        private readonly ICrudRepository<AppUser> _userRepository;
+        private UserManager<AppUser> _userManager;
         private readonly IMapper _mapper;
-        public UserService(ICrudRepository<Post> userRepository, IMapper mapper)
+        public UserService(UserManager<AppUser> userManager, IMapper mapper)
         {
-            _userRepository = userRepository;
+            _userManager = userManager;
             _mapper = mapper;
         }
 
-        public Task<List<AppUser>> GetAllUsersAsync()
+        public async Task<List<AppUser>> GetAllUsersAsync()
         {
-            throw new NotImplementedException();
+            return await _userManager.Users.ToListAsync();
         }
 
-        public Task<List<AppUser>> GetAllUsersWithUsernameAsync(string username)
+        public async Task<AppUser> GetByUsernameAsync(string username)
         {
-            throw new NotImplementedException();
+            return await _userManager.FindByNameAsync(username);
         }
 
         public Task<AppUser> GetUserByIdAsync(int id)
