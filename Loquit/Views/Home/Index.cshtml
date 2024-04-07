@@ -1,35 +1,40 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
-<div class="d-flex justify-content-center">
-    <div class="col-7 bg-warning">
-        <div style="margin-top: 4rem">
+<div class="main-container d-flex justify-content-center">
+    <div class="left-container">
+        <div class="lr-container-content">
             @for (int i = 0; i < 10; i++)
             {
-                    <div class="container-fluid d-flex justify-content-center flex-column border border-primary p-0" style="width: 98%; margin: 0 1% 1%">
-                        <div class="d-flex justify-content-between flex-row" style="width: 98%; margin: 1% 1% 0">
-                            <h3>Q ha4y Pizzy</h3>
-                            <div class="d-flex justify-content-between flex-row gap-2">
-                                <h5 class="align-bottom">like</h5>
-                                <h5 class="align-bottom">dislike</h5>
-                                <h5 class="align-bottom">comment</h5>
-                                <h5 class="align-bottom">ooo</h5>
+                    <div class="post container-fluid d-flex justify-content-center flex-column">
+                        <div class="post-header d-flex justify-content-between flex-row">
+                            <div class="post-header-text">fbhewbfcajwhebr fvarwe gf erabg etrhg  terh tr eh ethterdh  td h btdfghb trfbh trf bhtrf bhg rdgetrsg e rihgerjagnrek gre</div>
+                            <div class="post-header-options d-flex justify-content-between flex-row gap-2">
+                                <div class="post-header-option">like</div>
+                                <div class="post-header-option">dislike</div>
+                                <div class="post-header-option">comment</div>
+                                <div class="post-header-option">ooo</div>
                             </div>
                         </div>
                         <div>
-                             <img style="width: 98%; margin: 1%; height: 20vw; object-fit: cover;" src="https://media.discordapp.net/attachments/1180581339444019262/1187136457891127418/2Q.png?ex=6620377b&is=660dc27b&hm=293dbfb407040f4f5d6aada9e0baf49261018f25ff6be54e5692683edac49897&=&format=webp&quality=lossless" />
+                             <img class="post-image" src="https://media.discordapp.net/attachments/1180581339444019262/1187136457891127418/2Q.png?ex=6620377b&is=660dc27b&hm=293dbfb407040f4f5d6aada9e0baf49261018f25ff6be54e5692683edac49897&=&format=webp&quality=lossless" />
                         </div>
                     </div>
             }
         </div>
     </div>
-    <div class="col-2 bg-danger">
-        <form class="d-flex justify-content-center flex-row" style="margin-top: 4rem">
-            <div class="form-group">
-              <input type="text" class="form-control" placeholder="Search..." style="border: 0; border-radius: 3vw 0 0 3vw; outline: none; box-shadow: none">
-            </div>
-            <button type="submit" class="btn btn-primary bg-white text-muted" style="border: 0; border-radius: 0 3vw 3vw 0; outline: none; box-shadow: none"><img src="~/img/lens.png" class="w-100 h-100"/></button>
-        </form>
+    <div class="right-container">
+        <div class="lr-container-content">
+            <form class="post-search d-flex justify-content-center flex-row">
+                <div class="form-group">
+                  <input type="text" class="post-search-bar form-control" placeholder="Search...">
+                </div>
+                <button type="submit" class="post-search-btn btn btn-primary"><img src="~/img/lens.png" class="btn-image"/></button>
+            </form>
+            <form class="d-flex justify-content-center flex-row">
+                <button type="submit" class="submit-btn btn btn-primary">New Post</button>
+            </form>
+        </div>
     </div>
 </div>
 
