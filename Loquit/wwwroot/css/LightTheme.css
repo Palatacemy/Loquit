@@ -1,6 +1,7 @@
 ﻿:root {
     --left: #FFF;
     --right: #ededed;
+    --bg: #7e7e7e;
     --logoA: #b2003b;
     --logoB: #700227;
     --logoC: #25000c;
@@ -49,12 +50,41 @@ body {
     width: 98%;
     margin: 0 1% 1%;
     border: solid var(--logoA) 2px;
-    border-radius: 1rem 0 1rem 1rem ;
+    border-radius: 1rem 0 1rem 1rem;
+    padding: 12px;
 }
 
 .post-header {
     width: 98%;
     margin: 1% 1% 0;
+}
+
+.pfp {
+    position: relative;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.pfp-small {
+    width: 30px;
+    height: 30px;
+}
+
+.pfp img {
+    position: absolute;
+    height: 100%;
+    left: 0;
+    top: 0;
+}
+
+.post-user {
+    margin-bottom: 10px;
+}
+
+.post-user a {
+    font-weight: bolder;
+    color: var(--bg) !important;
+    margin-left: 10px;
 }
 
 .post-header-text {
@@ -74,17 +104,27 @@ body {
     margin: auto;
     text-align: center;
     font-size: 1rem;
+    font-weight: bold;
+    color: var(--bg);
 }
 
-.like,
-.dislike,
-.comment {
+.option {
     width: 40%;
     filter: brightness(0) saturate(100%) invert(50%) sepia(1%) saturate(0%) brightness(98%) contrast(98%);
 }
 
+.option:hover {
+    scale: 1.1;
+    filter: brightness(0) saturate(100%) invert(5%) sepia(64%) saturate(7146%) hue-rotate(331deg) brightness(94%) contrast(101%);
+    transition: 0.1s;
+}
+
 .dislike {
     transform: rotateX(180deg);
+}
+
+.dislike {
+
 }
 
 .post-image {
