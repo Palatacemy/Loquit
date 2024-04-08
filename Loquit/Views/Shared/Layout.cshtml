@@ -6,7 +6,7 @@
     <title>@ViewData["Title"] - Loquit</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     @{
-        int theme = 2;
+        int theme = 3;
     }
     @if (theme == 1)
     {
@@ -35,13 +35,13 @@
                             <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Chats</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Privacy">Groups</a>
+                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Groups</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Privacy">Friends</a>
+                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Friends</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Privacy">Settings</a>
+                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Settings</a>
                         </li>
                     </ul>
                     <partial name="_LoginPartial" />
@@ -50,7 +50,7 @@
         </nav>
     </header>
     <div class="container-fluid">
-        <main role="main" class="render-body screen pb-3">
+        <main role="main" class="render-body screen">
             @RenderBody()
         </main>
     </div>

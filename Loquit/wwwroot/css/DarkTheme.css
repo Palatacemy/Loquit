@@ -42,10 +42,19 @@ body {
     background: var(--logoC);
 }
 
+a {
+    text-decoration: none;
+}
+
+label {
+    color: var(--text);
+}
+
 .main-container {
     max-width: 70rem;
     margin: 0 auto;
 }
+
 
 /* ------ left container ------ */
 
@@ -102,11 +111,7 @@ body {
     top: 0;
 }
 
-.post-user {
-
-}
-
-.post-user a {
+.post-name {
     font-weight: bolder;
     color: var(--bg) !important;
     margin: auto auto auto 10px;
@@ -170,17 +175,16 @@ body {
     margin: auto;
 }
 
-.more-btn:hover {
-    scale: 1.1;
-    transition: 0.1s;
-    background-color: var(--left);
-    border: solid var(--logoB) 2px;
+    .more-btn:hover {
+        scale: 1.1;
+        transition: 0.1s;
+        background-color: var(--left);
+        border: solid var(--logoB) 2px;
+    }
 
-}
-
-.more-btn:hover .more {
-    filter: brightness(0) saturate(100%) invert(25%) sepia(86%) saturate(5830%) hue-rotate(329deg) brightness(67%) contrast(117%);
-}
+        .more-btn:hover .more {
+            filter: brightness(0) saturate(100%) invert(25%) sepia(86%) saturate(5830%) hue-rotate(329deg) brightness(67%) contrast(117%);
+        }
 
 button.show {
     scale: 1.1;
@@ -189,9 +193,9 @@ button.show {
     border: solid var(--logoB) 2px !important;
 }
 
-button.show .more {
-    filter: brightness(0) saturate(100%) invert(25%) sepia(86%) saturate(5830%) hue-rotate(329deg) brightness(67%) contrast(117%);
-}
+    button.show .more {
+        filter: brightness(0) saturate(100%) invert(25%) sepia(86%) saturate(5830%) hue-rotate(329deg) brightness(67%) contrast(117%);
+    }
 
 .more {
     width: 50%;
@@ -219,14 +223,27 @@ button.show .more {
     box-shadow: none !important;
 }
 
-.dropdown-item:hover {
-    color: var(--logoA);
-    background-color: var(--right);
-}
+    .dropdown-item:hover {
+        color: var(--logoA);
+        background-color: var(--right);
+    }
 
-.normal-btn:hover{
+.normal-btn:hover {
     background-color: var(--logoB) !important;
 }
+
+.normal-btn:focus {
+    background-color: var(--left);
+}
+
+.highlighted-button:hover {
+    background-color: var(--logoB) !important;
+}
+
+.highlighted-button:focus {
+    background-color: var(--logoA);
+}
+
 
 
 /* ------ right container ------ */
@@ -249,15 +266,22 @@ button.show .more {
     width: 16rem;
 }
 
-.post-search-bar {
+.form-control {
     height: 2rem;
     border: 0;
-    border-radius: 3vw 0 0 3vw;
+    border-radius: 3vw 3vw 3vw 3vw;
     outline: none !important;
     box-shadow: none !important;
     background-color: var(--left) !important;
     color: var(--bg) !important;
 }
+
+
+.post-search-bar {
+    border-radius: 3vw 0 0 3vw;
+}
+
+
 
 .post-search-btn {
     height: 2rem;
@@ -270,9 +294,9 @@ button.show .more {
     background-color: var(--left);
 }
 
-.post-search-btn:hover .btn-image {
-    filter: invert(100%);
-}
+    .post-search-btn:hover .btn-image {
+        filter: invert(100%);
+    }
 
 .btn-image {
     filter: invert(50%);
@@ -285,7 +309,7 @@ button.show .more {
     margin: auto;
 }
 
-.submit-btn {
+.create-post-btn {
     background-color: var(--logoA);
     color: var(--left);
     font-weight: 400;
@@ -294,4 +318,8 @@ button.show .more {
     width: 15.5rem;
     outline: none !important;
     box-shadow: none !important;
+}
+
+.col-md-4 {
+    margin: 0 auto;
 }

@@ -42,11 +42,19 @@ body {
     background: var(--logoB);
 }
 
+a {
+    text-decoration: none;
+}
+
+label {
+    color: var(--text);
+}
 
 .main-container {
     max-width: 70rem;
     margin: 0 auto;
 }
+
 
 /* ------ left container ------ */
 
@@ -103,14 +111,11 @@ body {
     top: 0;
 }
 
-.post-user {
+.post-name {
+    font-weight: bolder;
+    color: var(--bg) !important;
+    margin: auto auto auto 10px;
 }
-
-    .post-user a {
-        font-weight: bolder;
-        color: var(--bg) !important;
-        margin: auto auto auto 10px;
-    }
 
 .post-header-text {
     font-size: 1rem;
@@ -227,6 +232,19 @@ button.show {
     background-color: var(--logoB) !important;
 }
 
+.normal-btn:focus {
+    background-color: var(--left);
+}
+
+.highlighted-button:hover {
+    background-color: var(--logoB) !important;
+}
+
+.highlighted-button:focus {
+    background-color: var(--logoA);
+}
+
+
 
 /* ------ right container ------ */
 
@@ -248,15 +266,22 @@ button.show {
     width: 16rem;
 }
 
-.post-search-bar {
+.form-control {
     height: 2rem;
     border: 0;
-    border-radius: 3vw 0 0 3vw;
+    border-radius: 3vw 3vw 3vw 3vw;
     outline: none !important;
     box-shadow: none !important;
     background-color: var(--left) !important;
     color: var(--bg) !important;
 }
+
+
+.post-search-bar {
+    border-radius: 3vw 0 0 3vw;
+}
+
+
 
 .post-search-btn {
     height: 2rem;
@@ -284,7 +309,7 @@ button.show {
     margin: auto;
 }
 
-.submit-btn {
+.create-post-btn {
     background-color: var(--logoA);
     color: var(--left);
     font-weight: 400;
@@ -293,4 +318,8 @@ button.show {
     width: 15.5rem;
     outline: none !important;
     box-shadow: none !important;
+}
+
+.col-md-4 {
+    margin: 0 auto;
 }
