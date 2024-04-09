@@ -10,7 +10,7 @@ namespace Loquit.Services.Abstractions
     public interface IUserService
     {
         Task<List<AppUser>> GetAllUsersAsync();
-        Task<AppUser> GetUserByIdAsync(int id);
+        Task<AppUser> GetUserByIdAsync(int? id);
         Task<AppUser?> GetByUsernameAsync(string username);
 
         //methods, work in progress

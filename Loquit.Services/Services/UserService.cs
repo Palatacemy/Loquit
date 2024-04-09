@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using Loquit.Data.Entities;
+﻿using Loquit.Data.Entities;
 using Loquit.Data.Repositories.Abstractions;
 using Loquit.Services.Abstractions;
 using Microsoft.AspNetCore.Identity;
@@ -15,11 +14,9 @@ namespace Loquit.Services.Services
     public class UserService : IUserService
     {
         private UserManager<AppUser> _userManager;
-        private readonly IMapper _mapper;
-        public UserService(UserManager<AppUser> userManager, IMapper mapper)
+        public UserService(UserManager<AppUser> userManager)
         {
             _userManager = userManager;
-            _mapper = mapper;
         }
 
         public async Task<List<AppUser>> GetAllUsersAsync()
@@ -32,7 +29,12 @@ namespace Loquit.Services.Services
             return await _userManager.FindByNameAsync(username);
         }
 
-        public Task<AppUser> GetUserByIdAsync(int id)
+        public async Task<AppUser> GetUserByIdAsync(int? id)
+        {
+            return await _userManager.FindByIdAsync(id.ToString()); 
+        }
+
+        public Task<List<AppUser>> GetAllUsersWithUsernameAsync(string username)
         {
             throw new NotImplementedException();
         }
