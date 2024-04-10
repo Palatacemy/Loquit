@@ -13,6 +13,9 @@ namespace Loquit.Data.Entities
         {
             Comments = new HashSet<Comment>();
             Evaluations = [0, 0, 0, 0, 0];
+            IsEdited = false;
+            IsNsfw = false;
+            IsSpoiler = false;
         }
         public string Title { get; set; }
         public string BodyText { get; set; }
