@@ -18,6 +18,8 @@ namespace Loquit.Data.Entities
             SavedPosts = new HashSet<Post>();
             LikedPosts = new HashSet<Post>();
             DislikedPosts = new HashSet<Post>();
+            FriendsIds = new HashSet<string>();
+            BlacklistIds = new HashSet<string>();
             CategoryPreferences = [0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3];
             EvaluationPreferences = [0.3, 0.3, 0.3, 0.3, 0.3];
             AllowNsfw = false;
@@ -36,8 +38,8 @@ namespace Loquit.Data.Entities
         public virtual ICollection<Post>? SavedPosts { get; set; }
         public virtual ICollection<Post>? LikedPosts { get; set; }
         public virtual ICollection<Post>? DislikedPosts { get; set; }
-        public string? FriendsIds { get; set; }
-        public string? BlacklistIds { get; set; }
+        public virtual ICollection<string>? FriendsIds { get; set; }
+        public virtual ICollection<string>? BlacklistIds { get; set; }
         public double[] CategoryPreferences { get; set; }
         public double[] EvaluationPreferences { get; set; }
         public bool AllowNsfw { get; set; }
