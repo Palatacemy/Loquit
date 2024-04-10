@@ -18,9 +18,6 @@
             <th>
                 @Html.DisplayNameFor(model => model.TimeOfSending)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.SenderIdInChat)
-            </th>
             <th></th>
         </tr>
     </thead>
@@ -32,9 +29,6 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.TimeOfSending)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SenderIdInChat)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |

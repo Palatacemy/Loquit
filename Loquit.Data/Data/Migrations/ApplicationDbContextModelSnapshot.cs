@@ -56,7 +56,7 @@ namespace Loquit.Data.Migrations
 
                     b.HasIndex("GroupChatId");
 
-                    b.ToTable("BaseMessage");
+                    b.ToTable("BaseMessage", (string)null);
 
                     b.HasDiscriminator<string>("Discriminator").HasValue("BaseMessage");
 
@@ -86,7 +86,7 @@ namespace Loquit.Data.Migrations
 
                     b.HasIndex("GroupChatId");
 
-                    b.ToTable("BaseMember");
+                    b.ToTable("BaseMember", (string)null);
                 });
 
             modelBuilder.Entity("Loquit.Data.Entities.ChatTypes.DirectChat", b =>
@@ -99,7 +99,7 @@ namespace Loquit.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("DirectChats");
+                    b.ToTable("DirectChats", (string)null);
                 });
 
             modelBuilder.Entity("Loquit.Data.Entities.ChatTypes.GroupChat", b =>
@@ -119,7 +119,7 @@ namespace Loquit.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("GroupChats");
+                    b.ToTable("GroupChats", (string)null);
                 });
 
             modelBuilder.Entity("Loquit.Data.Entities.Comment", b =>
@@ -147,7 +147,7 @@ namespace Loquit.Data.Migrations
 
                     b.HasIndex("PostId");
 
-                    b.ToTable("Comments");
+                    b.ToTable("Comments", (string)null);
                 });
 
             modelBuilder.Entity("Loquit.Data.Entities.Post", b =>
@@ -200,7 +200,7 @@ namespace Loquit.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Posts");
+                    b.ToTable("Posts", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>

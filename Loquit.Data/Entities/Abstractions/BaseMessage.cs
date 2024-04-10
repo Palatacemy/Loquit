@@ -10,5 +10,6 @@ namespace Loquit.Data.Entities.Abstractions
     {
         public DateTime TimeOfSending { get; set; }
         public string SenderUserId { get; set; }
+        public BaseMessage Reply { get; set; }
     }
 }
