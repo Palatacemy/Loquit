@@ -9,6 +9,6 @@ namespace Loquit.Data.Repositories.Abstractions
 {
     public interface IPostRepository : ICrudRepository<Post>
     {
-        public Task AddComment(Comment comment, List<Comment> Comments);
+        
     }
 }

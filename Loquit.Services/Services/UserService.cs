@@ -1,5 +1,4 @@
 ﻿using Loquit.Data.Entities;
-using Loquit.Data.Repositories.Abstractions;
 using Loquit.Services.Abstractions;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -13,10 +12,16 @@ namespace Loquit.Services.Services
 {
     public class UserService : IUserService
     {
-        private UserManager<AppUser> _userManager;
+        private readonly UserManager<AppUser> _userManager;
+
         public UserService(UserManager<AppUser> userManager)
         {
             _userManager = userManager;
+        }
+
+        public async Task<IdentityResult> CreateUserAsync(AppUser user, string password)
+        {
+            return await _userManager.CreateAsync(user, password);
         }
 
         public async Task<List<AppUser>> GetAllUsersAsync()
@@ -24,19 +29,24 @@ namespace Loquit.Services.Services
             return await _userManager.Users.ToListAsync();
         }
 
-        public async Task<AppUser> GetByUsernameAsync(string username)
+        public async Task<AppUser?> GetUserByIdAsync(string userId)
         {
-            return await _userManager.FindByNameAsync(username);
+            return await _userManager.FindByIdAsync(userId);
         }
 
-        public async Task<AppUser> GetUserByIdAsync(int? id)
+        public async Task<IdentityResult> UpdateUserAsync(AppUser user)
         {
-            return await _userManager.FindByIdAsync(id.ToString()); 
+            return await _userManager.UpdateAsync(user);
         }
 
-        public Task<List<AppUser>> GetAllUsersWithUsernameAsync(string username)
+        public async Task<IdentityResult> DeleteUserAsync(string userId)
         {
-            throw new NotImplementedException();
+            var user = await _userManager.FindByIdAsync(userId);
+            if (user != null)
+            {
+                return await _userManager.DeleteAsync(user);
+            }
+            return IdentityResult.Failed(new IdentityError { Description = "User not found" });
         }
     }
 }
