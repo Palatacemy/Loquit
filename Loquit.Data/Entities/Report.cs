@@ -14,5 +14,6 @@ namespace Loquit.Data.Entities
         public string AttachedText { get; set; }
         public BaseMessage? ReportedMessage { get; set; }
         public Post? ReportedPost { get; set; }
+        public Comment? ReportedComment { get; set; }
     }
 }
