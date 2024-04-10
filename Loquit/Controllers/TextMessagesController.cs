@@ -7,22 +7,24 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Loquit.Data;
 using Loquit.Data.Entities.MessageTypes;
+using Loquit.Services.Abstractions.MessageTypesAbstractions;
+using Loquit.Services.DTOs.MessageTypesDTOs;
 
 namespace Loquit.Web.Controllers
 {
     public class TextMessagesController : Controller
     {
-        private readonly ApplicationDbContext _context;
+        private readonly ITextMessageService _textMessageService;
 
-        public TextMessagesController(ApplicationDbContext context)
+        public TextMessagesController(ITextMessageService textMessageService)
         {
-            _context = context;
+            _textMessageService = textMessageService;
         }
 
         // GET: TextMessages
         public async Task<IActionResult> Index()
         {
-            return View(await _context.TextMessages.ToListAsync());
+            return View(await _textMessageService.GetTextMessagesAsync());
         }
 
         // GET: TextMessages/Details/5
@@ -33,8 +35,7 @@ namespace Loquit.Web.Controllers
                 return NotFound();
             }
 
-            var textMessage = await _context.TextMessages
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var textMessage = await _textMessageService.GetTextMessageByIdAsync(id.Value);
             if (textMessage == null)
             {
                 return NotFound();
@@ -54,12 +55,11 @@ namespace Loquit.Web.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Text,TimeOfSending,SenderIdInChat,Id")] TextMessage textMessage)
+        public async Task<IActionResult> Create([Bind("Text,TimeOfSending,SenderIdInChat,Id")] TextMessageDTO textMessage)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(textMessage);
-                await _context.SaveChangesAsync();
+                await _textMessageService.AddTextMessageAsync(textMessage);
                 return RedirectToAction(nameof(Index));
             }
             return View(textMessage);
@@ -73,7 +73,7 @@ namespace Loquit.Web.Controllers
                 return NotFound();
             }
 
-            var textMessage = await _context.TextMessages.FindAsync(id);
+            var textMessage = await _textMessageService.GetTextMessageByIdAsync(id.Value);
             if (textMessage == null)
             {
                 return NotFound();
@@ -86,7 +86,7 @@ namespace Loquit.Web.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Text,TimeOfSending,SenderIdInChat,Id")] TextMessage textMessage)
+        public async Task<IActionResult> Edit(int id, [Bind("Text,TimeOfSending,SenderIdInChat,Id")] TextMessageDTO textMessage)
         {
             if (id != textMessage.Id)
             {
@@ -97,12 +97,11 @@ namespace Loquit.Web.Controllers
             {
                 try
                 {
-                    _context.Update(textMessage);
-                    await _context.SaveChangesAsync();
+                    await _textMessageService.UpdateTextMessageAsync(textMessage);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!TextMessageExists(textMessage.Id))
+                    if (!await TextMessageExists(textMessage.Id))
                     {
                         return NotFound();
                     }
@@ -124,8 +123,7 @@ namespace Loquit.Web.Controllers
                 return NotFound();
             }
 
-            var textMessage = await _context.TextMessages
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var textMessage = await _textMessageService.GetTextMessageByIdAsync(id.Value);
             if (textMessage == null)
             {
                 return NotFound();
@@ -139,19 +137,19 @@ namespace Loquit.Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var textMessage = await _context.TextMessages.FindAsync(id);
+            var textMessage = await _textMessageService.GetTextMessageByIdAsync(id);
             if (textMessage != null)
             {
-                _context.TextMessages.Remove(textMessage);
+                await _textMessageService.DeleteTextMessageByIdAsync(id);
             }
 
-            await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool TextMessageExists(int id)
+        private async Task<bool> TextMessageExists(int id)
         {
-            return _context.TextMessages.Any(e => e.Id == id);
+            var textMessage = await _textMessageService.GetTextMessageByIdAsync(id);
+            return textMessage != null;
         }
     }
 }

@@ -10,7 +10,7 @@ namespace Loquit.Services.Abstractions
     public interface ICommentService
     {
         Task<List<CommentDTO>> GetCommentsAsync();
-        Task<CommentDTO> GetCategoryByIdAsync(int id);
+        Task<CommentDTO> GetCommentByIdAsync(int id);
         Task<List<CommentDTO>> GetCommentsWithTextAsync(string text);
         Task AddCommentAsync(CommentDTO comment);
         Task DeleteCommentByIdAsync(int id);

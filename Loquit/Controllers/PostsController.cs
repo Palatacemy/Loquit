@@ -7,22 +7,24 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Loquit.Data;
 using Loquit.Data.Entities;
+using Loquit.Services.Abstractions;
+using Loquit.Services.DTOs;
 
 namespace Loquit.Web.Controllers
 {
     public class PostsController : Controller
     {
-        private readonly ApplicationDbContext _context;
+        private readonly IPostService _postService;
 
-        public PostsController(ApplicationDbContext context)
+        public PostsController(IPostService postService)
         {
-            _context = context;
+            _postService = postService;
         }
 
         // GET: Posts
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Posts.ToListAsync());
+            return View(await _postService.GetPostsAsync());
         }
 
         // GET: Posts/Details/5
@@ -33,8 +35,7 @@ namespace Loquit.Web.Controllers
                 return NotFound();
             }
 
-            var post = await _context.Posts
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var post = await _postService.GetPostByIdAsync(id.Value);
             if (post == null)
             {
                 return NotFound();
@@ -54,12 +55,11 @@ namespace Loquit.Web.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Title,BodyText,PictureUrl,CreatorId,TimeOfPosting,Likes,Dislikes,Id")] Post post)
+        public async Task<IActionResult> Create([Bind("Title,BodyText,PictureUrl,CreatorId,TimeOfPosting,Likes,Dislikes,Id")] PostDTO post)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(post);
-                await _context.SaveChangesAsync();
+                await _postService.AddPostAsync(post);
                 return RedirectToAction(nameof(Index));
             }
             return View(post);
@@ -73,7 +73,7 @@ namespace Loquit.Web.Controllers
                 return NotFound();
             }
 
-            var post = await _context.Posts.FindAsync(id);
+            var post = await _postService.GetPostByIdAsync(id.Value);
             if (post == null)
             {
                 return NotFound();
@@ -86,7 +86,7 @@ namespace Loquit.Web.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Title,BodyText,PictureUrl,CreatorId,TimeOfPosting,Likes,Dislikes,Id")] Post post)
+        public async Task<IActionResult> Edit(int id, [Bind("Title,BodyText,PictureUrl,CreatorId,TimeOfPosting,Likes,Dislikes,Id")] PostDTO post)
         {
             if (id != post.Id)
             {
@@ -97,12 +97,11 @@ namespace Loquit.Web.Controllers
             {
                 try
                 {
-                    _context.Update(post);
-                    await _context.SaveChangesAsync();
+                    await _postService.UpdatePostAsync(post);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!PostExists(post.Id))
+                    if (!await PostExists(post.Id))
                     {
                         return NotFound();
                     }
@@ -124,8 +123,7 @@ namespace Loquit.Web.Controllers
                 return NotFound();
             }
 
-            var post = await _context.Posts
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var post = await _postService.GetPostByIdAsync(id.Value);
             if (post == null)
             {
                 return NotFound();
@@ -139,19 +137,19 @@ namespace Loquit.Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var post = await _context.Posts.FindAsync(id);
+            var post = await _postService.GetPostByIdAsync(id);
             if (post != null)
             {
-                _context.Posts.Remove(post);
+                await _postService.DeletePostByIdAsync(id);
             }
 
-            await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool PostExists(int id)
+        private async Task<bool> PostExists(int id)
         {
-            return _context.Posts.Any(e => e.Id == id);
+            var post = await _postService.GetPostByIdAsync(id);
+            return post != null;
         }
     }
 }

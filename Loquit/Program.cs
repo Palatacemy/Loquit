@@ -1,6 +1,14 @@
 using Loquit.Data;
+using Loquit.Data.Repositories.Abstractions;
+using Loquit.Data.Repositories;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Loquit.Services.Abstractions.ChatTypesAbstractions;
+using Loquit.Services.Services.ChatTypesServices;
+using Loquit.Services.Abstractions.MessageTypesAbstractions;
+using Loquit.Services.Services.MessageTypesServices;
+using Loquit.Services.Abstractions;
+using Loquit.Services.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,6 +21,16 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddTransient(typeof(ICrudRepository<>), typeof(CrudRepository<>));
+builder.Services.AddTransient<IDirectChatService, DirectChatService>();
+builder.Services.AddTransient<IGroupChatService, GroupChatService>();
+builder.Services.AddTransient<IImageMessageService, ImageMessageService>();
+builder.Services.AddTransient<ITextMessageService, TextMessageService>();
+builder.Services.AddTransient<ICommentService, CommentService>();
+builder.Services.AddTransient<IPostService, PostService>();
+
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 var app = builder.Build();
 

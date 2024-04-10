@@ -7,22 +7,24 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Loquit.Data;
 using Loquit.Data.Entities.MessageTypes;
+using Loquit.Services.Abstractions.MessageTypesAbstractions;
+using Loquit.Services.DTOs.MessageTypesDTOs;
 
 namespace Loquit.Web.Controllers
 {
     public class ImageMessagesController : Controller
     {
-        private readonly ApplicationDbContext _context;
+        private readonly IImageMessageService _imageMessageService;
 
-        public ImageMessagesController(ApplicationDbContext context)
+        public ImageMessagesController(IImageMessageService imageMessageService)
         {
-            _context = context;
+            _imageMessageService = imageMessageService;
         }
 
         // GET: ImageMessages
         public async Task<IActionResult> Index()
         {
-            return View(await _context.ImageMessages.ToListAsync());
+            return View(await _imageMessageService.GetImageMessagesAsync());
         }
 
         // GET: ImageMessages/Details/5
@@ -33,8 +35,7 @@ namespace Loquit.Web.Controllers
                 return NotFound();
             }
 
-            var imageMessage = await _context.ImageMessages
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var imageMessage = await _imageMessageService.GetImageMessageByIdAsync(id.Value);
             if (imageMessage == null)
             {
                 return NotFound();
@@ -54,12 +55,11 @@ namespace Loquit.Web.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("PictureUrl,TimeOfSending,SenderIdInChat,Id")] ImageMessage imageMessage)
+        public async Task<IActionResult> Create([Bind("PictureUrl,TimeOfSending,SenderIdInChat,Id")] ImageMessageDTO imageMessage)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(imageMessage);
-                await _context.SaveChangesAsync();
+                await _imageMessageService.AddImageMessageAsync(imageMessage);
                 return RedirectToAction(nameof(Index));
             }
             return View(imageMessage);
@@ -73,7 +73,7 @@ namespace Loquit.Web.Controllers
                 return NotFound();
             }
 
-            var imageMessage = await _context.ImageMessages.FindAsync(id);
+            var imageMessage = await _imageMessageService.GetImageMessageByIdAsync(id.Value);
             if (imageMessage == null)
             {
                 return NotFound();
@@ -86,7 +86,7 @@ namespace Loquit.Web.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("PictureUrl,TimeOfSending,SenderIdInChat,Id")] ImageMessage imageMessage)
+        public async Task<IActionResult> Edit(int id, [Bind("PictureUrl,TimeOfSending,SenderIdInChat,Id")] ImageMessageDTO imageMessage)
         {
             if (id != imageMessage.Id)
             {
@@ -97,12 +97,11 @@ namespace Loquit.Web.Controllers
             {
                 try
                 {
-                    _context.Update(imageMessage);
-                    await _context.SaveChangesAsync();
+                    await _imageMessageService.UpdateImageMessageAsync(imageMessage);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ImageMessageExists(imageMessage.Id))
+                    if (!await ImageMessageExists(imageMessage.Id))
                     {
                         return NotFound();
                     }
@@ -124,8 +123,7 @@ namespace Loquit.Web.Controllers
                 return NotFound();
             }
 
-            var imageMessage = await _context.ImageMessages
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var imageMessage = await _imageMessageService.GetImageMessageByIdAsync(id.Value);
             if (imageMessage == null)
             {
                 return NotFound();
@@ -139,19 +137,19 @@ namespace Loquit.Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var imageMessage = await _context.ImageMessages.FindAsync(id);
+            var imageMessage = await _imageMessageService.GetImageMessageByIdAsync(id);
             if (imageMessage != null)
             {
-                _context.ImageMessages.Remove(imageMessage);
+                await _imageMessageService.DeleteImageMessageByIdAsync(id);
             }
 
-            await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool ImageMessageExists(int id)
+        private async Task<bool> ImageMessageExists(int id)
         {
-            return _context.ImageMessages.Any(e => e.Id == id);
+            var imageMessage = await _imageMessageService.GetImageMessageByIdAsync(id);
+            return imageMessage != null;
         }
     }
 }

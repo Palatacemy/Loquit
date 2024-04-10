@@ -7,22 +7,24 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Loquit.Data;
 using Loquit.Data.Entities;
+using Loquit.Services.Abstractions;
+using Loquit.Services.DTOs;
 
 namespace Loquit.Web.Controllers
 {
     public class CommentsController : Controller
     {
-        private readonly ApplicationDbContext _context;
+        private readonly ICommentService _commentService;
 
-        public CommentsController(ApplicationDbContext context)
+        public CommentsController(ICommentService commentService)
         {
-            _context = context;
+            _commentService = commentService;
         }
 
         // GET: Comments
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Comments.ToListAsync());
+            return View(await _commentService.GetCommentsAsync());
         }
 
         // GET: Comments/Details/5
@@ -33,8 +35,7 @@ namespace Loquit.Web.Controllers
                 return NotFound();
             }
 
-            var comment = await _context.Comments
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var comment = await _commentService.GetCommentByIdAsync(id.Value);
             if (comment == null)
             {
                 return NotFound();
@@ -54,12 +55,11 @@ namespace Loquit.Web.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Text,CommenterId,TimeOfCommenting,Id")] Comment comment)
+        public async Task<IActionResult> Create([Bind("Text,CommenterId,TimeOfCommenting,Id")] CommentDTO comment)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(comment);
-                await _context.SaveChangesAsync();
+                await _commentService.AddCommentAsync(comment);
                 return RedirectToAction(nameof(Index));
             }
             return View(comment);
@@ -73,7 +73,7 @@ namespace Loquit.Web.Controllers
                 return NotFound();
             }
 
-            var comment = await _context.Comments.FindAsync(id);
+            var comment = await _commentService.GetCommentByIdAsync(id.Value);
             if (comment == null)
             {
                 return NotFound();
@@ -86,7 +86,7 @@ namespace Loquit.Web.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Text,CommenterId,TimeOfCommenting,Id")] Comment comment)
+        public async Task<IActionResult> Edit(int id, [Bind("Text,CommenterId,TimeOfCommenting,Id")] CommentDTO comment)
         {
             if (id != comment.Id)
             {
@@ -97,12 +97,11 @@ namespace Loquit.Web.Controllers
             {
                 try
                 {
-                    _context.Update(comment);
-                    await _context.SaveChangesAsync();
+                    await _commentService.UpdateCommentAsync(comment);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!CommentExists(comment.Id))
+                    if (!await CommentExists(comment.Id))
                     {
                         return NotFound();
                     }
@@ -124,8 +123,7 @@ namespace Loquit.Web.Controllers
                 return NotFound();
             }
 
-            var comment = await _context.Comments
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var comment = await _commentService.GetCommentByIdAsync(id.Value);
             if (comment == null)
             {
                 return NotFound();
@@ -139,19 +137,19 @@ namespace Loquit.Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var comment = await _context.Comments.FindAsync(id);
+            var comment = await _commentService.GetCommentByIdAsync(id);
             if (comment != null)
             {
-                _context.Comments.Remove(comment);
+                await _commentService.DeleteCommentByIdAsync(id);
             }
 
-            await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool CommentExists(int id)
+        private async Task<bool> CommentExists(int id)
         {
-            return _context.Comments.Any(e => e.Id == id);
+            var comment = await _commentService.GetCommentByIdAsync(id);
+            return comment != null;
         }
     }
 }

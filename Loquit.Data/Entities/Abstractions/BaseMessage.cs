@@ -13,7 +13,7 @@ namespace Loquit.Data.Entities.Abstractions
             IsEdited = false;
         }
         public DateTime TimeOfSending { get; set; }
-        public int SenderIdInChat { get; set; }
+        public string SenderUserId { get; set; }
         public bool IsEdited { get; set; }
     }
 }
