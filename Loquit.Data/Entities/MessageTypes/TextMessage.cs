@@ -9,6 +9,11 @@ namespace Loquit.Data.Entities.MessageTypes
 {
     public class TextMessage : BaseMessage
     {
+        public TextMessage()
+        {
+            IsEdited = false;
+        }
         public string Text { get; set; }
+        public bool IsEdited { get; set; }
     }
 }
