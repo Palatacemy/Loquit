@@ -5,13 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>@ViewData["Title"] - Loquit</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/Loquit.styles.css" asp-append-version="true" />
+    @{
+        int theme = 3;
+    }
+    @if (theme == 1)
+    {
+        <link rel="stylesheet" href="~/css/LightTheme.css" asp-append-version="true" />
+    } else if (theme == 2) {
+        <link rel="stylesheet" href="~/css/CrimsonTheme.css" asp-append-version="true" />
+    } else
+    {
+        <link rel="stylesheet" href="~/css/DarkTheme.css" asp-append-version="true" />
+    }
+    <link rel="icon" type="image/png" href="~/img/Loquit.png" sizes="640x640">
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3 fixed-top">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light box-shadow mb-3 fixed-top">
             <div class="container-fluid">
+                <img id="logo" src="~/img/Loquit.png"/>
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Loquit</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
@@ -20,10 +32,16 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Chats</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Groups</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Friends</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Settings</a>
                         </li>
                     </ul>
                     <partial name="_LoginPartial" />
@@ -32,7 +50,7 @@
         </nav>
     </header>
     <div class="container-fluid">
-        <main role="main" class="pb-3">
+        <main role="main" class="render-body screen">
             @RenderBody()
         </main>
     </div>

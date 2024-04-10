@@ -1,35 +1,68 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
-<div class="d-flex justify-content-center">
-    <div class="col-7 bg-warning">
-        <div style="margin-top: 4rem">
+<div class="main-container d-flex justify-content-center">
+    <div class="left-container">
+        <div class="lr-container-content">
             @for (int i = 0; i < 10; i++)
             {
-                    <div class="container-fluid d-flex justify-content-center flex-column border border-primary p-0" style="width: 98%; margin: 0 1% 1%">
-                        <div class="d-flex justify-content-between flex-row" style="width: 98%; margin: 1% 1% 0">
-                            <h3>Q ha4y Pizzy</h3>
-                            <div class="d-flex justify-content-between flex-row gap-2">
-                                <h5 class="align-bottom">like</h5>
-                                <h5 class="align-bottom">dislike</h5>
-                                <h5 class="align-bottom">comment</h5>
-                                <h5 class="align-bottom">ooo</h5>
+                    <div class="post container-fluid d-flex justify-content-center flex-column">
+                        <div class="post-header d-flex justify-content-between flex-row">
+                            <div class="post-header-text">
+                                 <div class="post-header-info d-flex flex-row justify-content-between">
+                                     <a asp-area="" asp-controller="Home" asp-action="Index" class="post-user d-flex flex-row">
+                                         <span class="pfp pfp-small"><img src="https://media.discordapp.net/attachments/1180581339444019262/1187136457891127418/2Q.png?ex=6620377b&is=660dc27b&hm=293dbfb407040f4f5d6aada9e0baf49261018f25ff6be54e5692683edac49897&=&format=webp&quality=lossless"/></span>
+                                         <span class="post-name">13_fhg_37</span>
+                                     </a>
+                                     <div class="post-header-options d-flex justify-content-between flex-row gap-2">
+                                        <div class="post-header-option">
+                                            <img class="option like" src="~/img/Like.png"/>
+                                            <div>100</div>
+                                        </div>
+                                        <div class="post-header-option">
+                                            <img class="option dislike" src="~/img/Like.png"/>
+                                            <div>10</div>
+                                        </div>
+                                        <div class="post-header-option">
+                                            <img class="option comment" src="~/img/Comment.png"/>
+                                            <div>15</div>
+                                        </div>
+                                        <div class="post-header-more">
+                                            <div class="dropdown">
+                                                <button class="more-btn btn btn-secondary" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                                    <img class="more" src="~/img/more.png"/>
+                                                </button>
+                                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                                    <li><a class="dropdown-item" href="#">Save</a></li>
+                                                    <li><a class="dropdown-item" href="#">Report</a></li>
+                                                    <li><a class="dropdown-item" href="#">Block User</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                fbh trf bhtrf bhg rdgetrsg e rihgerjagnrek gre sdgfdasgdfsg d fkjgjfds gkfdkjg kaflg hsah gsda glsflakdh glakfsdjg hlnafjk gjkfd gkfsag khfas gjksa dfgsjkg kjamfg
                             </div>
                         </div>
-                        <div>
-                             <img style="width: 98%; margin: 1%; height: 20vw; object-fit: cover;" src="https://media.discordapp.net/attachments/1180581339444019262/1187136457891127418/2Q.png?ex=6620377b&is=660dc27b&hm=293dbfb407040f4f5d6aada9e0baf49261018f25ff6be54e5692683edac49897&=&format=webp&quality=lossless" />
-                        </div>
+                        <a asp-area="" asp-controller="Post" asp-action="Details" asp-route-id="@i">
+                             <img class="post-image" src="https://media.discordapp.net/attachments/1180581339444019262/1187136457891127418/2Q.png?ex=6620377b&is=660dc27b&hm=293dbfb407040f4f5d6aada9e0baf49261018f25ff6be54e5692683edac49897&=&format=webp&quality=lossless" />
+                        </a>
                     </div>
             }
         </div>
     </div>
-    <div class="col-2 bg-danger">
-        <form class="d-flex justify-content-center flex-row" style="margin-top: 4rem">
-            <div class="form-group">
-              <input type="text" class="form-control" placeholder="Search..." style="border: 0; border-radius: 3vw 0 0 3vw; outline: none; box-shadow: none">
+    <div class="right-container">
+        <div class="lr-container-content">
+            <div class="post-search d-flex justify-content-center flex-row">
+                <div class="form-group">
+                  <input type="text" class="post-search-bar form-control" placeholder="Search...">
+                </div>
+                <button type="submit" class="normal-btn post-search-btn btn btn-primary"><img src="~/img/lens.png" class="btn-image"/></button>
             </div>
-            <button type="submit" class="btn btn-primary bg-white text-muted" style="border: 0; border-radius: 0 3vw 3vw 0; outline: none; box-shadow: none"><img src="~/img/lens.png" class="w-100 h-100"/></button>
-        </form>
+            <form class="d-flex justify-content-center flex-row">
+                <button asp-controller="Posts" asp-action="Create" type="submit" class="highlighted-button create-post-btn btn btn-primary">New Post</button>
+            </form>
+        </div>
     </div>
 </div>
 

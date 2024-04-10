@@ -10,5 +10,6 @@ namespace Loquit.Data.Entities.ChatTypes
     public class GroupChat : BaseChat
     {
         public DateOnly DateOfCreation { get; set; }
+        public string PictureUrl { get; set; }
     }
 }
