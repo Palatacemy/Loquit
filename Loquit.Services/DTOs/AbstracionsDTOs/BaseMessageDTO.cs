@@ -9,7 +9,6 @@ namespace Loquit.Services.DTOs.AbstracionsDTOs
     public abstract class BaseMessageDTO : BaseDTO
     {
         public DateTime TimeOfSending { get; set; }
-        public int SenderIdInChat { get; set; }
-        public bool IsEdited { get; set; }
+        public string SenderUserId { get; set; }
     }
 }
