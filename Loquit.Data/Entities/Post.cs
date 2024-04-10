@@ -17,7 +17,7 @@ namespace Loquit.Data.Entities
         public string Title { get; set; }
         public string BodyText { get; set; }
         public string PictureUrl { get; set; }
-        public int CreatorId { get; set; }
+        public string CreatorId { get; set; }
         public DateTime TimeOfPosting { get; set; }
         public int Likes { get; set; }
         public int Dislikes { get; set; }

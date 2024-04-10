@@ -22,6 +22,7 @@ namespace Loquit.Data.Entities
             EvaluationPreferences = [0.3, 0.3, 0.3, 0.3, 0.3];
             AllowNsfw = false;
             ColorThemeId = 0;
+
         }
         public string FirstName { get; set; }
         public string LastName { get; set; }
@@ -34,11 +35,13 @@ namespace Loquit.Data.Entities
         public virtual ICollection<Post>? SavedPosts { get; set; }
         public virtual ICollection<Post>? LikedPosts { get; set; }
         public virtual ICollection<Post>? DislikedPosts { get; set; }
-        public int? FriendsIds { get; set; }
-        public int? BlacklistIds { get; set; }
+        public string? FriendsIds { get; set; }
+        public string? BlacklistIds { get; set; }
         public double[] CategoryPreferences { get; set; }
         public double[] EvaluationPreferences { get; set; }
         public bool AllowNsfw { get; set; }
         public int ColorThemeId { get; set; }
+        public virtual ICollection<string>? FriendRequestsSent { get; set; }
+        public virtual ICollection<string>? FriendRequestsReceived { get; set; }
     }
 }
