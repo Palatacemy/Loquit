@@ -22,7 +22,8 @@ namespace Loquit.Data.Entities
             EvaluationPreferences = [0.3, 0.3, 0.3, 0.3, 0.3];
             AllowNsfw = false;
             ColorThemeId = 0;
-
+            FriendRequestsSent = new HashSet<string>();
+            FriendRequestsReceived = new HashSet<string>();
         }
         public string FirstName { get; set; }
         public string LastName { get; set; }
