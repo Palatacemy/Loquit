@@ -237,50 +237,6 @@ namespace Loquit.Data.Migrations
                     b.ToTable("Posts");
                 });
 
-            modelBuilder.Entity("Loquit.Data.Entities.Report", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("AttachedText")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("ReportedCommentId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ReportedMessageId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ReportedPostId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ReportedUserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("ReportingUserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ReportedCommentId");
-
-                    b.HasIndex("ReportedMessageId");
-
-                    b.HasIndex("ReportedPostId");
-
-                    b.HasIndex("ReportedUserId");
-
-                    b.HasIndex("ReportingUserId");
-
-                    b.ToTable("Reports");
-                });
-
             modelBuilder.Entity("Loquit.Data.Entities.Save", b =>
                 {
                     b.Property<int>("Id")
@@ -696,49 +652,6 @@ namespace Loquit.Data.Migrations
                         .IsRequired();
 
                     b.Navigation("Creator");
-                });
-
-            modelBuilder.Entity("Loquit.Data.Entities.Report", b =>
-                {
-                    b.HasOne("Loquit.Data.Entities.Comment", "ReportedComment")
-                        .WithMany()
-                        .HasForeignKey("ReportedCommentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Loquit.Data.Entities.Abstractions.BaseMessage", "ReportedMessage")
-                        .WithMany()
-                        .HasForeignKey("ReportedMessageId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Loquit.Data.Entities.Post", "ReportedPost")
-                        .WithMany()
-                        .HasForeignKey("ReportedPostId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Loquit.Data.Entities.AppUser", "ReportedUser")
-                        .WithMany()
-                        .HasForeignKey("ReportedUserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Loquit.Data.Entities.AppUser", "ReportingUser")
-                        .WithMany()
-                        .HasForeignKey("ReportingUserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("ReportedComment");
-
-                    b.Navigation("ReportedMessage");
-
-                    b.Navigation("ReportedPost");
-
-                    b.Navigation("ReportedUser");
-
-                    b.Navigation("ReportingUser");
                 });
 
             modelBuilder.Entity("Loquit.Data.Entities.Save", b =>

@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Loquit.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class GenerateSchema : Migration
+    public partial class ManufactureSchema : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -377,54 +377,6 @@ namespace Loquit.Data.Migrations
                         onDelete: ReferentialAction.Restrict);
                 });
 
-            migrationBuilder.CreateTable(
-                name: "Reports",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    ReportingUserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    ReportedUserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    AttachedText = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ReportedMessageId = table.Column<int>(type: "int", nullable: false),
-                    ReportedPostId = table.Column<int>(type: "int", nullable: false),
-                    ReportedCommentId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Reports", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Reports_AspNetUsers_ReportedUserId",
-                        column: x => x.ReportedUserId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Reports_AspNetUsers_ReportingUserId",
-                        column: x => x.ReportingUserId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Reports_BaseMessage_ReportedMessageId",
-                        column: x => x.ReportedMessageId,
-                        principalTable: "BaseMessage",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Reports_Comments_ReportedCommentId",
-                        column: x => x.ReportedCommentId,
-                        principalTable: "Comments",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Reports_Posts_ReportedPostId",
-                        column: x => x.ReportedPostId,
-                        principalTable: "Posts",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
             migrationBuilder.CreateIndex(
                 name: "IX_AppUserBaseChat_MembersId",
                 table: "AppUserBaseChat",
@@ -520,31 +472,6 @@ namespace Loquit.Data.Migrations
                 column: "CreatorId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Reports_ReportedCommentId",
-                table: "Reports",
-                column: "ReportedCommentId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Reports_ReportedMessageId",
-                table: "Reports",
-                column: "ReportedMessageId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Reports_ReportedPostId",
-                table: "Reports",
-                column: "ReportedPostId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Reports_ReportedUserId",
-                table: "Reports",
-                column: "ReportedUserId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Reports_ReportingUserId",
-                table: "Reports",
-                column: "ReportingUserId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Saves_PostId",
                 table: "Saves",
                 column: "PostId");
@@ -577,25 +504,22 @@ namespace Loquit.Data.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "BaseMessage");
+
+            migrationBuilder.DropTable(
+                name: "Comments");
+
+            migrationBuilder.DropTable(
                 name: "Dislikes");
 
             migrationBuilder.DropTable(
                 name: "Likes");
 
             migrationBuilder.DropTable(
-                name: "Reports");
-
-            migrationBuilder.DropTable(
                 name: "Saves");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
-
-            migrationBuilder.DropTable(
-                name: "BaseMessage");
-
-            migrationBuilder.DropTable(
-                name: "Comments");
 
             migrationBuilder.DropTable(
                 name: "BaseChat");

@@ -24,7 +24,6 @@ namespace Loquit.Data
         public DbSet<Dislike> Dislikes { get; set; }
         public DbSet<Save> Saves { get; set; }
         public DbSet<Comment> Comments { get; set; }
-        public DbSet<Report> Reports { get; set; }
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
