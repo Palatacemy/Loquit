@@ -9,7 +9,7 @@ namespace Loquit.Services.DTOs.AbstracionsDTOs
 {
     public abstract class BaseChatDTO : BaseDTO
     {
-        public List<AppUser> Members { get; set; }
-        public List<BaseMessageDTO>? Messages { get; set; }
+        public virtual List<AppUser> Members { get; set; }
+        public virtual List<BaseMessageDTO>? Messages { get; set; }
     }
 }

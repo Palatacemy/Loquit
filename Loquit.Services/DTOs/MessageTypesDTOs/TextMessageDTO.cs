@@ -9,6 +9,11 @@ namespace Loquit.Services.DTOs.MessageTypesDTOs
 {
     public class TextMessageDTO : BaseMessageDTO
     {
+        public TextMessageDTO()
+        {
+            IsEdited = false;
+        }
         public string Text { get; set; }
+        public bool IsEdited { get; set; }
     }
 }

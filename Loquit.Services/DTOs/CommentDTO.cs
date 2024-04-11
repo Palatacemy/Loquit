@@ -1,4 +1,5 @@
-﻿using Loquit.Services.DTOs.AbstracionsDTOs;
+﻿using Loquit.Data.Entities;
+using Loquit.Services.DTOs.AbstracionsDTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,8 +10,13 @@ namespace Loquit.Services.DTOs
 {
     public class CommentDTO : BaseDTO
     {
+        public CommentDTO()
+        {
+            IsEdited = false;
+        }
         public string Text { get; set; }
-        public int CommenterId { get; set; }
+        public virtual AppUser? Commenter { get; set; }
         public DateTime TimeOfCommenting { get; set; }
+        public bool IsEdited { get; set; }
     }
 }
