@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Loquit.Web", "Loquit\Loquit
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Loquit.Services", "Loquit.Services\Loquit.Services.csproj", "{0B6E02F0-4D4D-46B7-9D1B-DE452F49BAF5}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Loquit.Data", "D:\Ee\Loquit.Data\Loquit.Data.csproj", "{0C03B5E4-167A-4E5C-8604-4370AAF47686}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Loquit.Data", "Loquit.Data\Loquit.Data.csproj", "{B0375767-06CE-4B25-98DC-E177E7BB7BB4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,10 +23,10 @@ Global
 		{0B6E02F0-4D4D-46B7-9D1B-DE452F49BAF5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0B6E02F0-4D4D-46B7-9D1B-DE452F49BAF5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0B6E02F0-4D4D-46B7-9D1B-DE452F49BAF5}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0C03B5E4-167A-4E5C-8604-4370AAF47686}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0C03B5E4-167A-4E5C-8604-4370AAF47686}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0C03B5E4-167A-4E5C-8604-4370AAF47686}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0C03B5E4-167A-4E5C-8604-4370AAF47686}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B0375767-06CE-4B25-98DC-E177E7BB7BB4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B0375767-06CE-4B25-98DC-E177E7BB7BB4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B0375767-06CE-4B25-98DC-E177E7BB7BB4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B0375767-06CE-4B25-98DC-E177E7BB7BB4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

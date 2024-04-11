@@ -12,7 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="D:\Ee\Loquit.Data\Loquit.Data.csproj" />
+    <ProjectReference Include="..\Loquit.Data\Loquit.Data.csproj" />
   </ItemGroup>
 
 </Project>

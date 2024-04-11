@@ -47,3 +47,5 @@ namespace Loquit.Data.Entities
         public virtual ICollection<AppUser>? FriendRequestsReceived { get; set; }
     }
 }
+
+// tst
