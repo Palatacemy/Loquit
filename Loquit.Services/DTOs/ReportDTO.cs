@@ -5,10 +5,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Loquit.Services.DTOs.AbstracionsDTOs;
 
 namespace Loquit.Services.DTOs
 {
-    public class ReportDTO
+    public class ReportDTO : BaseDTO
     {
         public string? ReportingUserId { get; set; }
         public virtual AppUser? ReportingUser { get; set; }
