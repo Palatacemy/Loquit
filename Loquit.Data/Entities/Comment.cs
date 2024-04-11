@@ -14,7 +14,7 @@ namespace Loquit.Data.Entities
             IsEdited = false;
         }
         public string Text { get; set; }
-        public string CommenterId { get; set; }
+        public virtual AppUser? Commenter { get; set; }
         public DateTime TimeOfCommenting { get; set; }
         public bool IsEdited { get; set; }
 

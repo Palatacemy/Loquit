@@ -8,7 +8,7 @@ namespace Loquit.Data.Entities.Abstractions
 {
     public abstract class BaseChat : BaseEntity
     {
-        public List<AppUser> Members { get; set; }
-        public List<BaseMessage>? Messages { get; set; }
+        public virtual List<AppUser> Members { get; set; }
+        public virtual List<BaseMessage>? Messages { get; set; }
     }
 }

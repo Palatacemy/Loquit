@@ -10,6 +10,9 @@ namespace Loquit.Data.Entities.Abstractions
     {
         public DateTime TimeOfSending { get; set; }
         public string SenderUserId { get; set; }
-        public BaseMessage Reply { get; set; }
+        public virtual AppUser? SenderUser { get; set; }
+        public virtual BaseMessage? Parent { get; set; }
+        public int ParentId { get; set; }
+        public ICollection<BaseMessage> Replies { get; set; }
     }
 }

@@ -21,10 +21,14 @@ namespace Loquit.Data.Entities
         public string BodyText { get; set; }
         public string PictureUrl { get; set; }
         public string CreatorId { get; set; }
+        public virtual AppUser? Creator { get; set; }
         public DateTime TimeOfPosting { get; set; }
         public int Likes { get; set; }
         public int Dislikes { get; set; }
         public virtual ICollection<Comment>? Comments { get; set; }
+        public virtual ICollection<Like> LikedBy { get; set; }
+        public virtual ICollection<Save> SavedBy { get; set; }
+        public virtual ICollection<Dislike> DislikedBy { get; set; }
         public int CategoryId { get; set; }
         public double[] Evaluations { get; set; }
         public bool IsSpoiler { get; set; }

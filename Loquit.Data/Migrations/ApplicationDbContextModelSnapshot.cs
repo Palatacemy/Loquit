@@ -75,12 +75,12 @@ namespace Loquit.Data.Migrations
                         .HasMaxLength(13)
                         .HasColumnType("nvarchar(13)");
 
-                    b.Property<int>("ReplyId")
+                    b.Property<int>("ParentId")
                         .HasColumnType("int");
 
                     b.Property<string>("SenderUserId")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime>("TimeOfSending")
                         .HasColumnType("datetime2");
@@ -89,7 +89,9 @@ namespace Loquit.Data.Migrations
 
                     b.HasIndex("BaseChatId");
 
-                    b.HasIndex("ReplyId");
+                    b.HasIndex("ParentId");
+
+                    b.HasIndex("SenderUserId");
 
                     b.ToTable("BaseMessage");
 
@@ -107,8 +109,7 @@ namespace Loquit.Data.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("CommenterId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<bool>("IsEdited")
                         .HasColumnType("bit");
@@ -125,9 +126,59 @@ namespace Loquit.Data.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CommenterId");
+
                     b.HasIndex("PostId");
 
                     b.ToTable("Comments");
+                });
+
+            modelBuilder.Entity("Loquit.Data.Entities.Dislike", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("PostId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PostId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Dislikes");
+                });
+
+            modelBuilder.Entity("Loquit.Data.Entities.Like", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("PostId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PostId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Likes");
                 });
 
             modelBuilder.Entity("Loquit.Data.Entities.Post", b =>
@@ -138,18 +189,6 @@ namespace Loquit.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("AppUserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("AppUserId1")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("AppUserId2")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("AppUserId3")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<string>("BodyText")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -159,7 +198,7 @@ namespace Loquit.Data.Migrations
 
                     b.Property<string>("CreatorId")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("Dislikes")
                         .HasColumnType("int");
@@ -193,13 +232,7 @@ namespace Loquit.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AppUserId");
-
-                    b.HasIndex("AppUserId1");
-
-                    b.HasIndex("AppUserId2");
-
-                    b.HasIndex("AppUserId3");
+                    b.HasIndex("CreatorId");
 
                     b.ToTable("Posts");
                 });
@@ -216,22 +249,22 @@ namespace Loquit.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("ReportedCommentId")
+                    b.Property<int>("ReportedCommentId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("ReportedMessageId")
+                    b.Property<int>("ReportedMessageId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("ReportedPostId")
+                    b.Property<int>("ReportedPostId")
                         .HasColumnType("int");
 
                     b.Property<string>("ReportedUserId")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("ReportingUserId")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
 
@@ -241,7 +274,35 @@ namespace Loquit.Data.Migrations
 
                     b.HasIndex("ReportedPostId");
 
+                    b.HasIndex("ReportedUserId");
+
+                    b.HasIndex("ReportingUserId");
+
                     b.ToTable("Reports");
+                });
+
+            modelBuilder.Entity("Loquit.Data.Entities.Save", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("PostId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PostId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Saves");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -504,9 +565,6 @@ namespace Loquit.Data.Migrations
                     b.Property<bool>("AllowNsfw")
                         .HasColumnType("bit");
 
-                    b.Property<string>("BlacklistIds")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("CategoryPreferences")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -529,24 +587,11 @@ namespace Loquit.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("FriendRequestsReceived")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("FriendRequestsSent")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("FriendsIds")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("LastName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ProfilePictureUrl")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Username")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -574,60 +619,145 @@ namespace Loquit.Data.Migrations
                         .WithMany("Messages")
                         .HasForeignKey("BaseChatId");
 
-                    b.HasOne("Loquit.Data.Entities.Abstractions.BaseMessage", "Reply")
+                    b.HasOne("Loquit.Data.Entities.Abstractions.BaseMessage", "Parent")
+                        .WithMany("Replies")
+                        .HasForeignKey("ParentId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Loquit.Data.Entities.AppUser", "SenderUser")
                         .WithMany()
-                        .HasForeignKey("ReplyId")
+                        .HasForeignKey("SenderUserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Reply");
+                    b.Navigation("Parent");
+
+                    b.Navigation("SenderUser");
                 });
 
             modelBuilder.Entity("Loquit.Data.Entities.Comment", b =>
                 {
+                    b.HasOne("Loquit.Data.Entities.AppUser", "Commenter")
+                        .WithMany()
+                        .HasForeignKey("CommenterId");
+
                     b.HasOne("Loquit.Data.Entities.Post", null)
                         .WithMany("Comments")
                         .HasForeignKey("PostId");
+
+                    b.Navigation("Commenter");
+                });
+
+            modelBuilder.Entity("Loquit.Data.Entities.Dislike", b =>
+                {
+                    b.HasOne("Loquit.Data.Entities.Post", "Post")
+                        .WithMany("DislikedBy")
+                        .HasForeignKey("PostId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Loquit.Data.Entities.AppUser", "User")
+                        .WithMany("DislikedPosts")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Post");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Loquit.Data.Entities.Like", b =>
+                {
+                    b.HasOne("Loquit.Data.Entities.Post", "Post")
+                        .WithMany("LikedBy")
+                        .HasForeignKey("PostId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Loquit.Data.Entities.AppUser", "User")
+                        .WithMany("LikedPosts")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Post");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Loquit.Data.Entities.Post", b =>
                 {
-                    b.HasOne("Loquit.Data.Entities.AppUser", null)
-                        .WithMany("DislikedPosts")
-                        .HasForeignKey("AppUserId");
-
-                    b.HasOne("Loquit.Data.Entities.AppUser", null)
-                        .WithMany("LikedPosts")
-                        .HasForeignKey("AppUserId1");
-
-                    b.HasOne("Loquit.Data.Entities.AppUser", null)
+                    b.HasOne("Loquit.Data.Entities.AppUser", "Creator")
                         .WithMany("Posts")
-                        .HasForeignKey("AppUserId2");
+                        .HasForeignKey("CreatorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.HasOne("Loquit.Data.Entities.AppUser", null)
-                        .WithMany("SavedPosts")
-                        .HasForeignKey("AppUserId3");
+                    b.Navigation("Creator");
                 });
 
             modelBuilder.Entity("Loquit.Data.Entities.Report", b =>
                 {
                     b.HasOne("Loquit.Data.Entities.Comment", "ReportedComment")
                         .WithMany()
-                        .HasForeignKey("ReportedCommentId");
+                        .HasForeignKey("ReportedCommentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Loquit.Data.Entities.Abstractions.BaseMessage", "ReportedMessage")
                         .WithMany()
-                        .HasForeignKey("ReportedMessageId");
+                        .HasForeignKey("ReportedMessageId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Loquit.Data.Entities.Post", "ReportedPost")
                         .WithMany()
-                        .HasForeignKey("ReportedPostId");
+                        .HasForeignKey("ReportedPostId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Loquit.Data.Entities.AppUser", "ReportedUser")
+                        .WithMany()
+                        .HasForeignKey("ReportedUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Loquit.Data.Entities.AppUser", "ReportingUser")
+                        .WithMany()
+                        .HasForeignKey("ReportingUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("ReportedComment");
 
                     b.Navigation("ReportedMessage");
 
                     b.Navigation("ReportedPost");
+
+                    b.Navigation("ReportedUser");
+
+                    b.Navigation("ReportingUser");
+                });
+
+            modelBuilder.Entity("Loquit.Data.Entities.Save", b =>
+                {
+                    b.HasOne("Loquit.Data.Entities.Post", "Post")
+                        .WithMany("SavedBy")
+                        .HasForeignKey("PostId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Loquit.Data.Entities.AppUser", "User")
+                        .WithMany("SavedPosts")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Post");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -686,9 +816,20 @@ namespace Loquit.Data.Migrations
                     b.Navigation("Messages");
                 });
 
+            modelBuilder.Entity("Loquit.Data.Entities.Abstractions.BaseMessage", b =>
+                {
+                    b.Navigation("Replies");
+                });
+
             modelBuilder.Entity("Loquit.Data.Entities.Post", b =>
                 {
                     b.Navigation("Comments");
+
+                    b.Navigation("DislikedBy");
+
+                    b.Navigation("LikedBy");
+
+                    b.Navigation("SavedBy");
                 });
 
             modelBuilder.Entity("Loquit.Data.Entities.AppUser", b =>
