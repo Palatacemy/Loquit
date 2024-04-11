@@ -19,6 +19,7 @@ namespace Loquit.Data
             public DbSet<TextMessage> TextMessages { get; set; }
             public DbSet<Post> Posts { get; set; }
             public DbSet<Comment> Comments { get; set; }
+            public DbSet<Report> Reports { get; set; }
     }
     public class DesignTimeDbContextFactory : IDesignTimeDbContextFactory<ApplicationDbContext>
     {

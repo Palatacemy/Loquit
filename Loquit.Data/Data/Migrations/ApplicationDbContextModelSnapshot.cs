@@ -22,6 +22,43 @@ namespace Loquit.Data.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("AppUserBaseChat", b =>
+                {
+                    b.Property<int>("ChatsId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("MembersId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("ChatsId", "MembersId");
+
+                    b.HasIndex("MembersId");
+
+                    b.ToTable("AppUserBaseChat");
+                });
+
+            modelBuilder.Entity("Loquit.Data.Entities.Abstractions.BaseChat", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Discriminator")
+                        .IsRequired()
+                        .HasMaxLength(13)
+                        .HasColumnType("nvarchar(13)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("BaseChat");
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("BaseChat");
+
+                    b.UseTphMappingStrategy();
+                });
+
             modelBuilder.Entity("Loquit.Data.Entities.Abstractions.BaseMessage", b =>
                 {
                     b.Property<int>("Id")
@@ -30,7 +67,7 @@ namespace Loquit.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int?>("DirectChatId")
+                    b.Property<int?>("BaseChatId")
                         .HasColumnType("int");
 
                     b.Property<string>("Discriminator")
@@ -38,88 +75,27 @@ namespace Loquit.Data.Migrations
                         .HasMaxLength(13)
                         .HasColumnType("nvarchar(13)");
 
-                    b.Property<int?>("GroupChatId")
+                    b.Property<int>("ReplyId")
                         .HasColumnType("int");
 
-                    b.Property<bool>("IsEdited")
-                        .HasColumnType("bit");
-
-                    b.Property<int>("SenderIdInChat")
-                        .HasColumnType("int");
+                    b.Property<string>("SenderUserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("TimeOfSending")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("DirectChatId");
+                    b.HasIndex("BaseChatId");
 
-                    b.HasIndex("GroupChatId");
+                    b.HasIndex("ReplyId");
 
-                    b.ToTable("BaseMessage", (string)null);
+                    b.ToTable("BaseMessage");
 
                     b.HasDiscriminator<string>("Discriminator").HasValue("BaseMessage");
 
                     b.UseTphMappingStrategy();
-                });
-
-            modelBuilder.Entity("Loquit.Data.Entities.BaseMember", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int?>("DirectChatId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("GroupChatId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("DirectChatId");
-
-                    b.HasIndex("GroupChatId");
-
-                    b.ToTable("BaseMember", (string)null);
-                });
-
-            modelBuilder.Entity("Loquit.Data.Entities.ChatTypes.DirectChat", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.HasKey("Id");
-
-                    b.ToTable("DirectChats", (string)null);
-                });
-
-            modelBuilder.Entity("Loquit.Data.Entities.ChatTypes.GroupChat", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<DateOnly>("DateOfCreation")
-                        .HasColumnType("date");
-
-                    b.Property<string>("PictureUrl")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("GroupChats", (string)null);
                 });
 
             modelBuilder.Entity("Loquit.Data.Entities.Comment", b =>
@@ -130,8 +106,12 @@ namespace Loquit.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("CommenterId")
-                        .HasColumnType("int");
+                    b.Property<string>("CommenterId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsEdited")
+                        .HasColumnType("bit");
 
                     b.Property<int?>("PostId")
                         .HasColumnType("int");
@@ -147,7 +127,7 @@ namespace Loquit.Data.Migrations
 
                     b.HasIndex("PostId");
 
-                    b.ToTable("Comments", (string)null);
+                    b.ToTable("Comments");
                 });
 
             modelBuilder.Entity("Loquit.Data.Entities.Post", b =>
@@ -158,6 +138,18 @@ namespace Loquit.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("AppUserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("AppUserId1")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("AppUserId2")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("AppUserId3")
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<string>("BodyText")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -165,8 +157,9 @@ namespace Loquit.Data.Migrations
                     b.Property<int>("CategoryId")
                         .HasColumnType("int");
 
-                    b.Property<int>("CreatorId")
-                        .HasColumnType("int");
+                    b.Property<string>("CreatorId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Dislikes")
                         .HasColumnType("int");
@@ -200,7 +193,55 @@ namespace Loquit.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Posts", (string)null);
+                    b.HasIndex("AppUserId");
+
+                    b.HasIndex("AppUserId1");
+
+                    b.HasIndex("AppUserId2");
+
+                    b.HasIndex("AppUserId3");
+
+                    b.ToTable("Posts");
+                });
+
+            modelBuilder.Entity("Loquit.Data.Entities.Report", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("AttachedText")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("ReportedCommentId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("ReportedMessageId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("ReportedPostId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ReportedUserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ReportingUserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ReportedCommentId");
+
+                    b.HasIndex("ReportedMessageId");
+
+                    b.HasIndex("ReportedPostId");
+
+                    b.ToTable("Reports");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -267,6 +308,11 @@ namespace Loquit.Data.Migrations
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Discriminator")
+                        .IsRequired()
+                        .HasMaxLength(13)
+                        .HasColumnType("nvarchar(13)");
+
                     b.Property<string>("Email")
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
@@ -318,6 +364,10 @@ namespace Loquit.Data.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("IdentityUser");
+
+                    b.UseTphMappingStrategy();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
@@ -401,6 +451,27 @@ namespace Loquit.Data.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("Loquit.Data.Entities.ChatTypes.DirectChat", b =>
+                {
+                    b.HasBaseType("Loquit.Data.Entities.Abstractions.BaseChat");
+
+                    b.HasDiscriminator().HasValue("DirectChat");
+                });
+
+            modelBuilder.Entity("Loquit.Data.Entities.ChatTypes.GroupChat", b =>
+                {
+                    b.HasBaseType("Loquit.Data.Entities.Abstractions.BaseChat");
+
+                    b.Property<DateOnly>("DateOfCreation")
+                        .HasColumnType("date");
+
+                    b.Property<string>("PictureUrl")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasDiscriminator().HasValue("GroupChat");
+                });
+
             modelBuilder.Entity("Loquit.Data.Entities.MessageTypes.ImageMessage", b =>
                 {
                     b.HasBaseType("Loquit.Data.Entities.Abstractions.BaseMessage");
@@ -416,6 +487,9 @@ namespace Loquit.Data.Migrations
                 {
                     b.HasBaseType("Loquit.Data.Entities.Abstractions.BaseMessage");
 
+                    b.Property<bool>("IsEdited")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Text")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -423,26 +497,90 @@ namespace Loquit.Data.Migrations
                     b.HasDiscriminator().HasValue("TextMessage");
                 });
 
-            modelBuilder.Entity("Loquit.Data.Entities.Abstractions.BaseMessage", b =>
+            modelBuilder.Entity("Loquit.Data.Entities.AppUser", b =>
                 {
-                    b.HasOne("Loquit.Data.Entities.ChatTypes.DirectChat", null)
-                        .WithMany("Messages")
-                        .HasForeignKey("DirectChatId");
+                    b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
 
-                    b.HasOne("Loquit.Data.Entities.ChatTypes.GroupChat", null)
-                        .WithMany("Messages")
-                        .HasForeignKey("GroupChatId");
+                    b.Property<bool>("AllowNsfw")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("BlacklistIds")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CategoryPreferences")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ColorThemeId")
+                        .HasColumnType("int");
+
+                    b.Property<DateOnly>("DateOfBirth")
+                        .HasColumnType("date");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("EvaluationPreferences")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FriendRequestsReceived")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FriendRequestsSent")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FriendsIds")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ProfilePictureUrl")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Username")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasDiscriminator().HasValue("AppUser");
                 });
 
-            modelBuilder.Entity("Loquit.Data.Entities.BaseMember", b =>
+            modelBuilder.Entity("AppUserBaseChat", b =>
                 {
-                    b.HasOne("Loquit.Data.Entities.ChatTypes.DirectChat", null)
-                        .WithMany("Members")
-                        .HasForeignKey("DirectChatId");
+                    b.HasOne("Loquit.Data.Entities.Abstractions.BaseChat", null)
+                        .WithMany()
+                        .HasForeignKey("ChatsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.HasOne("Loquit.Data.Entities.ChatTypes.GroupChat", null)
-                        .WithMany("Members")
-                        .HasForeignKey("GroupChatId");
+                    b.HasOne("Loquit.Data.Entities.AppUser", null)
+                        .WithMany()
+                        .HasForeignKey("MembersId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Loquit.Data.Entities.Abstractions.BaseMessage", b =>
+                {
+                    b.HasOne("Loquit.Data.Entities.Abstractions.BaseChat", null)
+                        .WithMany("Messages")
+                        .HasForeignKey("BaseChatId");
+
+                    b.HasOne("Loquit.Data.Entities.Abstractions.BaseMessage", "Reply")
+                        .WithMany()
+                        .HasForeignKey("ReplyId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Reply");
                 });
 
             modelBuilder.Entity("Loquit.Data.Entities.Comment", b =>
@@ -450,6 +588,46 @@ namespace Loquit.Data.Migrations
                     b.HasOne("Loquit.Data.Entities.Post", null)
                         .WithMany("Comments")
                         .HasForeignKey("PostId");
+                });
+
+            modelBuilder.Entity("Loquit.Data.Entities.Post", b =>
+                {
+                    b.HasOne("Loquit.Data.Entities.AppUser", null)
+                        .WithMany("DislikedPosts")
+                        .HasForeignKey("AppUserId");
+
+                    b.HasOne("Loquit.Data.Entities.AppUser", null)
+                        .WithMany("LikedPosts")
+                        .HasForeignKey("AppUserId1");
+
+                    b.HasOne("Loquit.Data.Entities.AppUser", null)
+                        .WithMany("Posts")
+                        .HasForeignKey("AppUserId2");
+
+                    b.HasOne("Loquit.Data.Entities.AppUser", null)
+                        .WithMany("SavedPosts")
+                        .HasForeignKey("AppUserId3");
+                });
+
+            modelBuilder.Entity("Loquit.Data.Entities.Report", b =>
+                {
+                    b.HasOne("Loquit.Data.Entities.Comment", "ReportedComment")
+                        .WithMany()
+                        .HasForeignKey("ReportedCommentId");
+
+                    b.HasOne("Loquit.Data.Entities.Abstractions.BaseMessage", "ReportedMessage")
+                        .WithMany()
+                        .HasForeignKey("ReportedMessageId");
+
+                    b.HasOne("Loquit.Data.Entities.Post", "ReportedPost")
+                        .WithMany()
+                        .HasForeignKey("ReportedPostId");
+
+                    b.Navigation("ReportedComment");
+
+                    b.Navigation("ReportedMessage");
+
+                    b.Navigation("ReportedPost");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -503,23 +681,25 @@ namespace Loquit.Data.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Loquit.Data.Entities.ChatTypes.DirectChat", b =>
+            modelBuilder.Entity("Loquit.Data.Entities.Abstractions.BaseChat", b =>
                 {
-                    b.Navigation("Members");
-
-                    b.Navigation("Messages");
-                });
-
-            modelBuilder.Entity("Loquit.Data.Entities.ChatTypes.GroupChat", b =>
-                {
-                    b.Navigation("Members");
-
                     b.Navigation("Messages");
                 });
 
             modelBuilder.Entity("Loquit.Data.Entities.Post", b =>
                 {
                     b.Navigation("Comments");
+                });
+
+            modelBuilder.Entity("Loquit.Data.Entities.AppUser", b =>
+                {
+                    b.Navigation("DislikedPosts");
+
+                    b.Navigation("LikedPosts");
+
+                    b.Navigation("Posts");
+
+                    b.Navigation("SavedPosts");
                 });
 #pragma warning restore 612, 618
         }
