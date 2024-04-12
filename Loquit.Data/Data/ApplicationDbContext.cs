@@ -32,7 +32,7 @@ namespace Loquit.Data
                 .HasMany(u => u.Posts)
                 .WithOne(p => p.Creator);
 
-            builder.Entity<BaseMessage>()
+            builder.Entity<Comment>()
                 .HasOne(m => m.Parent)
                 .WithMany(m => m.Replies)
                 .HasForeignKey(m => m.ParentId)

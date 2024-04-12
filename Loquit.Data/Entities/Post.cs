@@ -12,6 +12,9 @@ namespace Loquit.Data.Entities
         public Post()
         {
             Comments = new HashSet<Comment>();
+            LikedBy = new HashSet<Like>();
+            DislikedBy = new HashSet<Dislike>();
+            SavedBy = new HashSet<Save>();
             Evaluations = [0, 0, 0, 0, 0];
             IsEdited = false;
             IsNsfw = false;
@@ -28,9 +31,9 @@ namespace Loquit.Data.Entities
         public int Likes { get; set; }
         public int Dislikes { get; set; }
         public virtual ICollection<Comment>? Comments { get; set; }
-        public virtual ICollection<Like> LikedBy { get; set; }
-        public virtual ICollection<Save> SavedBy { get; set; }
-        public virtual ICollection<Dislike> DislikedBy { get; set; }
+        public virtual ICollection<Like>? LikedBy { get; set; }
+        public virtual ICollection<Save>? SavedBy { get; set; }
+        public virtual ICollection<Dislike>? DislikedBy { get; set; }
         public int CategoryId { get; set; }
         public double[] Evaluations { get; set; }
         public bool IsSpoiler { get; set; }

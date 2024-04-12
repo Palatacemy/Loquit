@@ -28,9 +28,9 @@ namespace Loquit.Services.DTOs
         public int Likes { get; set; }
         public int Dislikes { get; set; }
         public virtual List<Comment>? Comments { get; set; }
-        public virtual List<Like> LikedBy { get; set; }
-        public virtual List<Save> SavedBy { get; set; }
-        public virtual List<Dislike> DislikedBy { get; set; }
+        public virtual List<Like>? LikedBy { get; set; }
+        public virtual List<Save>? SavedBy { get; set; }
+        public virtual List<Dislike>? DislikedBy { get; set; }
         public int CategoryId { get; set; }
         public double[] Evaluations { get; set; }
         public bool IsSpoiler { get; set; }
