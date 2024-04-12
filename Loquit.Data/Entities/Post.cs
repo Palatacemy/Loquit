@@ -16,6 +16,8 @@ namespace Loquit.Data.Entities
             IsEdited = false;
             IsNsfw = false;
             IsSpoiler = false;
+            Likes = 0;
+            Dislikes = 0;
         }
         public string Title { get; set; }
         public string BodyText { get; set; }

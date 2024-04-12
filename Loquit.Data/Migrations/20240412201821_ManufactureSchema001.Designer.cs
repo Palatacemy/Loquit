@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Loquit.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240411223658_ManufactureSchema")]
-    partial class ManufactureSchema
+    [Migration("20240412201821_ManufactureSchema001")]
+    partial class ManufactureSchema001
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -114,8 +114,14 @@ namespace Loquit.Data.Migrations
                     b.Property<string>("CommenterId")
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<int>("Dislikes")
+                        .HasColumnType("int");
+
                     b.Property<bool>("IsEdited")
                         .HasColumnType("bit");
+
+                    b.Property<int>("Likes")
+                        .HasColumnType("int");
 
                     b.Property<int?>("PostId")
                         .HasColumnType("int");

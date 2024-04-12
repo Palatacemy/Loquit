@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Loquit.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class ManufactureSchema : Migration
+    public partial class ManufactureSchema001 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -282,6 +282,8 @@ namespace Loquit.Data.Migrations
                     CommenterId = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     TimeOfCommenting = table.Column<DateTime>(type: "datetime2", nullable: false),
                     IsEdited = table.Column<bool>(type: "bit", nullable: false),
+                    Likes = table.Column<int>(type: "int", nullable: false),
+                    Dislikes = table.Column<int>(type: "int", nullable: false),
                     PostId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
