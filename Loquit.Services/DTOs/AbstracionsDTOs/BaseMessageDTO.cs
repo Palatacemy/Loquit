@@ -13,8 +13,8 @@ namespace Loquit.Services.DTOs.AbstracionsDTOs
         public DateTime TimeOfSending { get; set; }
         public string SenderUserId { get; set; }
         public virtual AppUser? SenderUser { get; set; }
-        public virtual BaseMessage? Parent { get; set; }
+        /*public virtual BaseMessage? Parent { get; set; }
         public int ParentId { get; set; }
-        public List<BaseMessage> Replies { get; set; }
+        public List<BaseMessage> Replies { get; set; }*/
     }
 }

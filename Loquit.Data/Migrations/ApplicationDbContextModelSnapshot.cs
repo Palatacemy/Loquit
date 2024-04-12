@@ -111,8 +111,14 @@ namespace Loquit.Data.Migrations
                     b.Property<string>("CommenterId")
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<int>("Dislikes")
+                        .HasColumnType("int");
+
                     b.Property<bool>("IsEdited")
                         .HasColumnType("bit");
+
+                    b.Property<int>("Likes")
+                        .HasColumnType("int");
 
                     b.Property<int?>("PostId")
                         .HasColumnType("int");
