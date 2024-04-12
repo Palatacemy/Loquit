@@ -23,6 +23,8 @@ namespace Loquit.Services.DTOs
         public bool IsEdited { get; set; }
         public int Likes { get; set; }
         public int Dislikes { get; set; }
+        public virtual List<Like> LikedBy { get; set; }
+        public virtual List<Dislike> DislikedBy { get; set; }
         public int RepliesCount { get; set; }
         public virtual Comment? Parent { get; set; }
         public int ParentId { get; set; }
