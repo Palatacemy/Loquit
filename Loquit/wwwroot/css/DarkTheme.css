@@ -10,6 +10,7 @@
 }
 
 body {
+    background-color: var(--left);
     background-image: url("../img/LoquitBGDark.jpg");
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -61,12 +62,6 @@ label {
 .left-container {
     width: 75%;
     background-color: var(--left);
-}
-
-@media (max-width: 1024px) {
-    .left-container {
-        width: 100%;
-    }
 }
 
 .lr-container-content {
@@ -182,7 +177,7 @@ label {
         border: solid var(--logoB) 2px;
     }
 
-        .more-btn:hover .more {
+        .more-btn:hover > .more {
             filter: brightness(0) saturate(100%) invert(25%) sepia(86%) saturate(5830%) hue-rotate(329deg) brightness(67%) contrast(117%);
         }
 
@@ -193,7 +188,7 @@ button.show {
     border: solid var(--logoB) 2px !important;
 }
 
-    button.show .more {
+    button.show > .more {
         filter: brightness(0) saturate(100%) invert(25%) sepia(86%) saturate(5830%) hue-rotate(329deg) brightness(67%) contrast(117%);
     }
 
@@ -253,13 +248,6 @@ button.show {
     background-color: var(--right);
 }
 
-@media (max-width: 1024px) {
-    .right-container {
-        width: 0;
-        display: none;
-    }
-}
-
 .post-search {
     margin: auto;
     margin-bottom: 1rem;
@@ -294,7 +282,7 @@ button.show {
     background-color: var(--left);
 }
 
-    .post-search-btn:hover .btn-image {
+    .post-search-btn:hover > .btn-image {
         filter: invert(100%);
     }
 
@@ -318,8 +306,32 @@ button.show {
     width: 15.5rem;
     outline: none !important;
     box-shadow: none !important;
+    margin: 0 auto;
 }
 
 .col-md-4 {
     margin: 0 auto;
+}
+
+@media (max-width: 1024px) {
+    .main-container {
+        flex-direction: column;
+    }
+
+        .main-container > div:first-child {
+            order: 1;
+        }
+
+    .left-container {
+        width: 100%;
+        background-color: var(--right);
+    }
+
+        .left-container > div {
+            margin-top: 1rem;
+        }
+
+    .right-container {
+        width: 100%;
+    }
 }

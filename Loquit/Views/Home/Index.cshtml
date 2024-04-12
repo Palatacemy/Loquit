@@ -11,26 +11,26 @@
                             <div class="post-header-text">
                                  <div class="post-header-info d-flex flex-row justify-content-between">
                                      <a asp-area="" asp-controller="Home" asp-action="Index" class="post-user d-flex flex-row">
-                                         <span class="pfp pfp-small"><img src="https://media.discordapp.net/attachments/1180581339444019262/1187136457891127418/2Q.png?ex=6620377b&is=660dc27b&hm=293dbfb407040f4f5d6aada9e0baf49261018f25ff6be54e5692683edac49897&=&format=webp&quality=lossless"/></span>
+                                    <span class="pfp pfp-small"><img src="https://media.discordapp.net/attachments/1180581339444019262/1187136457891127418/2Q.png?ex=6620377b&is=660dc27b&hm=293dbfb407040f4f5d6aada9e0baf49261018f25ff6be54e5692683edac49897&=&format=webp&quality=lossless" loading="lazy" /></span>
                                          <span class="post-name">13_fhg_37</span>
                                      </a>
                                      <div class="post-header-options d-flex justify-content-between flex-row gap-2">
                                         <div class="post-header-option">
-                                            <img class="option like" src="~/img/Like.png"/>
+                                        <img class="option like" src="~/img/Like.png" loading="lazy" />
                                             <div>100</div>
                                         </div>
                                         <div class="post-header-option">
-                                            <img class="option dislike" src="~/img/Like.png"/>
+                                        <img class="option dislike" src="~/img/Like.png" loading="lazy" />
                                             <div>10</div>
                                         </div>
                                         <div class="post-header-option">
-                                            <img class="option comment" src="~/img/Comment.png"/>
+                                        <img class="option comment" src="~/img/Comment.png" loading="lazy" />
                                             <div>15</div>
                                         </div>
                                         <div class="post-header-more">
                                             <div class="dropdown">
                                                 <button class="more-btn btn btn-secondary" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                                                    <img class="more" src="~/img/more.png"/>
+                                                <img class="more" src="~/img/more.png" loading="lazy" />
                                                 </button>
                                                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                                                     <li><a class="dropdown-item" href="#">Save</a></li>
@@ -45,7 +45,7 @@
                             </div>
                         </div>
                         <a asp-area="" asp-controller="Post" asp-action="Details" asp-route-id="@i">
-                             <img class="post-image" src="https://media.discordapp.net/attachments/1180581339444019262/1187136457891127418/2Q.png?ex=6620377b&is=660dc27b&hm=293dbfb407040f4f5d6aada9e0baf49261018f25ff6be54e5692683edac49897&=&format=webp&quality=lossless" />
+                        <img class="post-image" src="https://media.discordapp.net/attachments/1180581339444019262/1187136457891127418/2Q.png?ex=6620377b&is=660dc27b&hm=293dbfb407040f4f5d6aada9e0baf49261018f25ff6be54e5692683edac49897&=&format=webp&quality=lossless" loading="lazy" />
                         </a>
                     </div>
             }
@@ -54,7 +54,7 @@
     <div class="right-container">
         <div class="lr-container-content">
             <div class="post-search d-flex justify-content-center flex-row">
-                <div class="form-group">
+                <div>
                   <input type="text" class="post-search-bar form-control" placeholder="Search...">
                 </div>
                 <button type="submit" class="normal-btn post-search-btn btn btn-primary"><img src="~/img/lens.png" class="btn-image"/></button>
