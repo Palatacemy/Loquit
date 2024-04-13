@@ -9,6 +9,7 @@ namespace Loquit.Data.Entities.MessageTypes
 {
     public class TextMessage : BaseMessage
     {
+        //a standart text message
         public TextMessage()
         {
             IsEdited = false;

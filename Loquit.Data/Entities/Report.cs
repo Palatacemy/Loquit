@@ -9,6 +9,7 @@ namespace Loquit.Data.Entities
 {
     public class Report : BaseEntity
     {
+        //a report ticket of a user, post, comment or message
         public string? ReportingUserId { get; set; }
         public virtual AppUser? ReportingUser { get; set; }
         public string? ReportedUserId { get; set; }

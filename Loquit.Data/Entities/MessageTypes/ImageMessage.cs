@@ -9,6 +9,7 @@ namespace Loquit.Data.Entities.MessageTypes
 {
     public class ImageMessage : BaseMessage
     {
+        //a message containing a single picture and no text
         public string PictureUrl { get; set; }
     }
 }

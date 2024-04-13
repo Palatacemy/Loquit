@@ -11,6 +11,7 @@ namespace Loquit.Data.Entities
 {
     public class AppUser : IdentityUser
     {
+        //user role, inheriting IdentityUser
         public AppUser()
         {
             Chats = new HashSet<BaseChat>();
