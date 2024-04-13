@@ -24,7 +24,7 @@ namespace Loquit.Data.Entities
         }
         public string Title { get; set; }
         public string BodyText { get; set; }
-        public string PictureUrl { get; set; }
+        public string? PictureUrl { get; set; }
         public string CreatorId { get; set; }
         public virtual AppUser? Creator { get; set; }
         public DateTime TimeOfPosting { get; set; }

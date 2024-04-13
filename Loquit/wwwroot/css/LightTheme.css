@@ -11,6 +11,7 @@
 
 ::-webkit-scrollbar {
     background: var(--left);
+    width: 8px;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -48,6 +49,11 @@ body {
 
 a {
     text-decoration: none;
+    color: inherit;
+}
+
+a:hover {
+    color: var(--logoA);
 }
 
 label {

@@ -1,32 +1,38 @@
-﻿@{
+﻿@using Microsoft.AspNetCore.Identity
+@{
     ViewData["Title"] = "Home Page";
 }
+
+@inject UserManager<IdentityUser> UserManager
+
 <div class="main-container d-flex justify-content-center">
     <div class="left-container">
         <div class="lr-container-content">
-@*             @for (int i = 0; i < 20; i++)
- *@            @foreach (var item in Model)
+            @foreach (var item in Model)
             {
+                
+                    var creator = await UserManager.FindByIdAsync(item.CreatorId);
+                
                     <div class="post container-fluid d-flex justify-content-center flex-column">
                         <div class="post-header d-flex justify-content-between flex-row">
                             <div class="post-header-text">
                                  <div class="post-header-info d-flex flex-row justify-content-between">
                                      <a asp-area="" asp-controller="Home" asp-action="Index" class="post-user d-flex flex-row">
-                                    <span class="pfp pfp-small"><img src="https://media.discordapp.net/attachments/1180581339444019262/1187136457891127418/2Q.png?ex=6620377b&is=660dc27b&hm=293dbfb407040f4f5d6aada9e0baf49261018f25ff6be54e5692683edac49897&=&format=webp&quality=lossless" loading="lazy" /></span>
-                                         <span class="post-name">13_fhg_37</span>
+                                    <span class="pfp pfp-small"><img src="@item.PictureUrl" loading="lazy" /></span>
+                                         <span class="post-name">@creator.UserName</span>
                                      </a>
                                      <div class="post-header-options d-flex justify-content-between flex-row gap-2">
                                         <div class="post-header-option">
                                         <img class="option like" src="~/img/Like.png" loading="lazy" />
-                                            <div>100</div>
+                                            <div>@item.LikedBy.Count</div>
                                         </div>
                                         <div class="post-header-option">
                                         <img class="option dislike" src="~/img/Like.png" loading="lazy" />
-                                            <div>10</div>
+                                            <div>@item.DislikedBy.Count</div>
                                         </div>
                                         <div class="post-header-option">
                                         <img class="option comment" src="~/img/Comment.png" loading="lazy" />
-                                            <div>15</div>
+                                            <div>@item.Comments.Count</div>
                                         </div>
                                         <div class="post-header-more">
                                             <div class="dropdown">
@@ -42,11 +48,13 @@
                                         </div>
                                     </div>
                                 </div>
-                                fbh trf bhtrf bhg rdgetrsg e rihgerjagnrek gre sdgfdasgdfsg d fkjgjfds gkfdkjg kaflg hsah gsda glsflakdh glakfsdjg hlnafjk gjkfd gkfsag khfas gjksa dfgsjkg kjamfg
+                                <a asp-area="" asp-controller="Posts" asp-action="Details" asp-route-id="@item.Id">
+                                @item.Title
+                                </a>
                             </div>
                         </div>
-                        <a asp-area="" asp-controller="Post" asp-action="Details" asp-route-id="">
-                        <img class="post-image" src="https://media.discordapp.net/attachments/1180581339444019262/1187136457891127418/2Q.png?ex=6620377b&is=660dc27b&hm=293dbfb407040f4f5d6aada9e0baf49261018f25ff6be54e5692683edac49897&=&format=webp&quality=lossless" loading="lazy" />
+                        <a asp-area="" asp-controller="Posts" asp-action="Details" asp-route-id="@item.Id">
+                        <img class="post-image" src="@item.PictureUrl" loading="lazy" />
                         </a>
                     </div>
             }

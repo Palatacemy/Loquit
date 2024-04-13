@@ -26,6 +26,8 @@ namespace Loquit.Data.Entities
         public int Dislikes { get; set; }
         public virtual ICollection<Like>? LikedBy { get; set; }
         public virtual ICollection<Dislike>? DislikedBy { get; set; }
+        public virtual Post? Post { get; set; }
+        public int PostId { get; set; }
         public virtual Comment? Parent { get; set; }
         public int ParentId { get; set; }
         public ICollection<Comment>? Replies { get; set; }

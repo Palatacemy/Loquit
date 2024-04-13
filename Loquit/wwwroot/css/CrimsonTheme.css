@@ -8,7 +8,19 @@
     --pink: #f7deff;
     --text: #dddddd;
 }
+::-webkit-scrollbar {
+    background: var(--left);
+    width: 8px;
+}
 
+::-webkit-scrollbar-thumb {
+    background: var(--logoA);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--logoB);
+}
 body {
     background-color: var(--left);
     background-image: url("../img/LoquitBGCrimson.jpg");
@@ -16,6 +28,8 @@ body {
     background-attachment: fixed;
     background-size: cover;
 }
+
+
 
 .navbar {
     background-color: var(--right) !important;
@@ -30,25 +44,23 @@ body {
     height: 5rem;
 }
 
-::-webkit-scrollbar {
-    background: var(--left);
-}
-
-::-webkit-scrollbar-thumb {
-    background: var(--logoA);
-    border-radius: 10px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-    background: var(--logoB);
-}
-
 a {
     text-decoration: none;
 }
 
 label {
     color: var(--text);
+}
+
+.midder {
+    padding-bottom: 2.5rem;
+}
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 1.5rem;
 }
 
 .main-container {
@@ -68,7 +80,6 @@ label {
     margin: 7rem auto auto auto;
     display: flex;
     flex-direction: column;
-    justify-content: center;
 }
 
 .post {
@@ -239,8 +250,6 @@ button.show {
     background-color: var(--logoA);
 }
 
-
-
 /* ------ right container ------ */
 
 .right-container {
@@ -306,6 +315,7 @@ button.show {
     width: 15.5rem;
     outline: none !important;
     box-shadow: none !important;
+    margin: 0 auto;
 }
 
 .col-md-4 {
@@ -334,3 +344,69 @@ button.show {
         width: 100%;
     }
 }
+
+/* ------ forms ------ */
+
+.form-container-content {
+    margin: 7rem auto auto auto;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    max-width: 60rem;
+    background-color: var(--right);
+    border-radius: 20px;
+    border: 1px var(--logoA) solid;
+}
+
+    .form-container-content > .row {
+        margin: 0 2rem;
+    }
+
+
+.form-title {
+    font-size: 2rem;
+    align-content: center;
+    margin-left: 2rem;
+    margin-top: 1rem;
+    color: var(--logoA);
+}
+
+.form-group {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+.form-button {
+    display: flex;
+    justify-content: center;
+}
+
+hr {
+    color: var(--logoA);
+}
+
+.form-check-input {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+    .form-check-input:checked {
+        border: none;
+        background-color: var(--logoA);
+        box-shadow: none !important;
+    }
+
+    .form-check-input:active {
+        border-color: var(--logoA) !important;
+        box-shadow: none !important;
+    }
+
+textarea {
+    border-radius: 2rem !important;
+    resize: none;
+    overflow: hidden;
+}
+
+    textarea.form-control {
+        min-height: 7rem;
+    }

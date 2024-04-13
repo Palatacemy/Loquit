@@ -23,15 +23,16 @@ namespace Loquit.Data.Entities
             CategoryPreferences = [0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3];
             EvaluationPreferences = [0.3, 0.3, 0.3, 0.3, 0.3];
             AllowNsfw = false;
-            ColorThemeId = 0;
+            ColorThemeId = 1;
             FriendRequestsSent = new HashSet<AppUser>();
             FriendRequestsReceived = new HashSet<AppUser>();
+            ProfilePictureUrl = "~/img/User.png";
         }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public DateOnly DateOfBirth { get; set; }
-        public string Description { get; set; }
-        public string ProfilePictureUrl { get; set; }
+        public string? FirstName { get; set; }
+        public string? LastName { get; set; }
+        public DateOnly? DateOfBirth { get; set; }
+        public string? Description { get; set; }
+        public string? ProfilePictureUrl { get; set; }
         public virtual ICollection<BaseChat>? Chats { get; set; }
         public virtual ICollection<Post>? Posts { get; set; }
         public virtual ICollection<Save>? SavedPosts { get; set; }

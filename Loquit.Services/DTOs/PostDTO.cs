@@ -18,15 +18,17 @@ namespace Loquit.Services.DTOs
             IsSpoiler = false;
             Likes = 0;
             Dislikes = 0;
+            CommentsNumber = 0;
         }
         public string Title { get; set; }
         public string BodyText { get; set; }
-        public string PictureUrl { get; set; }
+        public string? PictureUrl { get; set; }
         public string CreatorId { get; set; }
         public virtual AppUser? Creator { get; set; }
         public DateTime TimeOfPosting { get; set; }
         public int Likes { get; set; }
         public int Dislikes { get; set; }
+        public int CommentsNumber { get; set; }
         public virtual List<Comment>? Comments { get; set; }
         public virtual List<Like>? LikedBy { get; set; }
         public virtual List<Save>? SavedBy { get; set; }

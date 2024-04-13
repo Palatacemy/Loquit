@@ -26,6 +26,8 @@ namespace Loquit.Services.DTOs
         public virtual List<Like>? LikedBy { get; set; }
         public virtual List<Dislike>? DislikedBy { get; set; }
         public int RepliesCount { get; set; }
+        public virtual Post? Post { get; set; }
+        public int PostId { get; set; }
         public virtual Comment? Parent { get; set; }
         public int ParentId { get; set; }
         public List<Comment>? Replies { get; set; }
