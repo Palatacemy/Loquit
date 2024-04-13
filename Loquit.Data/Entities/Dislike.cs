@@ -9,7 +9,8 @@ namespace Loquit.Data.Entities
 {
     public class Dislike : BaseEntity
     {
-        public int PostId { get; set; }
+        //represents a single dislike of a post or comment
+        public int? PostId { get; set; }
         public virtual Post? Post { get; set; }
         public int? CommentId { get; set; }
         public virtual Comment? Comment { get; set; }
