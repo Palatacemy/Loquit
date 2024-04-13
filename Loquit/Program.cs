@@ -9,6 +9,8 @@ using Loquit.Services.Abstractions.MessageTypesAbstractions;
 using Loquit.Services.Services.MessageTypesServices;
 using Loquit.Services.Abstractions;
 using Loquit.Services.Services;
+using Loquit.Data.Entities;
+using Microsoft.Extensions.Options;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,8 +20,9 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-    .AddEntityFrameworkStores<ApplicationDbContext>();
+builder.Services.AddDefaultIdentity<IdentityUser>(options => {
+    options.SignIn.RequireConfirmedAccount = false;
+}).AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddTransient(typeof(ICrudRepository<>), typeof(CrudRepository<>));
