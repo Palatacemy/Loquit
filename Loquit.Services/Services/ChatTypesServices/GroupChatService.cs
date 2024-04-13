@@ -22,6 +22,7 @@ namespace Loquit.Services.Services.ChatTypesServices
             _mapper = mapper;
         }
 
+        //Add a group chat
         public async Task AddGroupChatAsync(GroupChatDTO model)
         {
             var groupChat = _mapper
@@ -30,17 +31,20 @@ namespace Loquit.Services.Services.ChatTypesServices
             await _groupChatRepository.AddAsync(groupChat);
         }
 
+        //Delete a group chat by its id
         public async Task DeleteGroupChatByIdAsync(int id)
         {
             await _groupChatRepository.DeleteByIdAsync(id);
         }
 
+        //Get a group chat by its id
         public async Task<GroupChatDTO> GetGroupChatByIdAsync(int id)
         {
             var groupChat = await _groupChatRepository.GetByIdAsync(id);
             return _mapper.Map<GroupChatDTO>(groupChat);
         }
 
+        //Get a list of group chats
         public async Task<List<GroupChatDTO>> GetGroupChatsAsync()
         {
             var groupChats = (await _groupChatRepository.GetAllAsync())
@@ -48,6 +52,7 @@ namespace Loquit.Services.Services.ChatTypesServices
             return _mapper.Map<List<GroupChatDTO>>(groupChats);
         }
 
+        //Update a group chat
         public async Task UpdateGroupChatAsync(GroupChatDTO model)
         {
             var groupChat = _mapper.Map<GroupChat>(model);

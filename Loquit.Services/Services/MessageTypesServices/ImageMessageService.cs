@@ -22,6 +22,7 @@ namespace Loquit.Services.Services.MessageTypesServices
             _mapper = mapper;
         }
 
+        //Add an image message
         public async Task AddImageMessageAsync(ImageMessageDTO model)
         {
             var imageMessage = _mapper
@@ -30,17 +31,20 @@ namespace Loquit.Services.Services.MessageTypesServices
             await _imageMessageRepository.AddAsync(imageMessage);
         }
 
+        //Delete an image message by its id
         public async Task DeleteImageMessageByIdAsync(int id)
         {
             await _imageMessageRepository.DeleteByIdAsync(id);
         }
 
+        //Get an image message by its id
         public async Task<ImageMessageDTO> GetImageMessageByIdAsync(int id)
         {
             var imageMessage = await _imageMessageRepository.GetByIdAsync(id);
             return _mapper.Map<ImageMessageDTO>(imageMessage);
         }
 
+        //Get a list of image messages
         public async Task<List<ImageMessageDTO>> GetImageMessagesAsync()
         {
             var imageMessages = (await _imageMessageRepository.GetAllAsync())
@@ -48,6 +52,7 @@ namespace Loquit.Services.Services.MessageTypesServices
             return _mapper.Map<List<ImageMessageDTO>>(imageMessages);
         }
 
+        //Update an image message
         public async Task UpdateImageMessageAsync(ImageMessageDTO model)
         {
             var imageMessage = _mapper.Map<ImageMessage>(model);

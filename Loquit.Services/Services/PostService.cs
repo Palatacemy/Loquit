@@ -22,6 +22,7 @@ namespace Loquit.Services.Services
             _mapper = mapper;
         }
 
+        //Add a post
         public async Task AddPostAsync(PostDTO model)
         {
             var post = _mapper
@@ -30,17 +31,20 @@ namespace Loquit.Services.Services
             await _postRepository.AddAsync(post);
         }
 
+        //Delete a post by its id
         public async Task DeletePostByIdAsync(int id)
         {
             await _postRepository.DeleteByIdAsync(id);
         }
 
+        //Get a post by its id
         public async Task<PostDTO> GetPostByIdAsync(int id)
         {
             var post = await _postRepository.GetByIdAsync(id);
             return _mapper.Map<PostDTO>(post);
         }
 
+        //Get a list of posts
         public async Task<List<PostDTO>> GetPostsAsync()
         {
             var posts = (await _postRepository.GetAllAsync())
@@ -48,6 +52,7 @@ namespace Loquit.Services.Services
             return _mapper.Map<List<PostDTO>>(posts);
         }
 
+        //Get a list of posts containing a specific title
         public async Task<List<PostDTO>> GetPostsWithTitleAsync(string title)
         {
             var posts = (await _postRepository.GetAsync(item => item.Title == title))
@@ -55,6 +60,7 @@ namespace Loquit.Services.Services
             return _mapper.Map<List<PostDTO>>(posts);
         }
 
+        //Update a post
         public async Task UpdatePostAsync(PostDTO model)
         {
             var post = _mapper.Map<Post>(model);

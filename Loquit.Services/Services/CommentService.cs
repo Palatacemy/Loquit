@@ -22,6 +22,7 @@ namespace Loquit.Services.Services
             _mapper = mapper;
         }
 
+        //Add a comment
         public async Task AddCommentAsync(CommentDTO model)
         {
             var comment = _mapper
@@ -30,17 +31,20 @@ namespace Loquit.Services.Services
             await _commentRepository.AddAsync(comment);
         }
 
+        //Delete a comment by its id
         public async Task DeleteCommentByIdAsync(int id)
         {
             await _commentRepository.DeleteByIdAsync(id);
         }
 
+        //Get a comment by its id
         public async Task<CommentDTO> GetCommentByIdAsync(int id)
         {
             var comment = await _commentRepository.GetByIdAsync(id);
             return _mapper.Map<CommentDTO>(comment);
         }
 
+        //Get a list of comments
         public async Task<List<CommentDTO>> GetCommentsAsync()
         {
             var comments = (await _commentRepository.GetAllAsync())
@@ -48,6 +52,7 @@ namespace Loquit.Services.Services
             return _mapper.Map<List<CommentDTO>>(comments);
         }
 
+        //Get a list of comments containing a specific text
         public async Task<List<CommentDTO>> GetCommentsWithTextAsync(string text)
         {
             var comments = (await _commentRepository.GetAsync(item => item.Text == text))
@@ -55,6 +60,7 @@ namespace Loquit.Services.Services
             return _mapper.Map<List<CommentDTO>>(comments);
         }
 
+        //Update a comment
         public async Task UpdateCommentAsync(CommentDTO model)
         {
             var comment = _mapper.Map<Comment>(model);
