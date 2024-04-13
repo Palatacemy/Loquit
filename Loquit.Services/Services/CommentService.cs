@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 
 namespace Loquit.Services.Services
 {
+    //service for comments; inherits from ICommentService
     public class CommentService : ICommentService
     {
         private readonly ICrudRepository<Comment> _commentRepository;

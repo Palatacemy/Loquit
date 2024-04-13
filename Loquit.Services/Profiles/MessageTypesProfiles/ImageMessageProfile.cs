@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace Loquit.Services.Profiles.MessageTypesProfiles
 {
+    //Profile for mapping ImageMessage and its DTO
     public class ImageMessageProfile : Profile
     {
         public ImageMessageProfile()

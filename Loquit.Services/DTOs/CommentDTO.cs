@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace Loquit.Services.DTOs
 {
+    //DTO for Comment; inherits from BaseDTO
     public class CommentDTO : BaseDTO
     {
         public CommentDTO()

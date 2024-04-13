@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace Loquit.Services.Profiles.MessageTypesProfiles
 {
+    //Profile for mapping TextMessage and its DTO
     public class TextMessageProfile : Profile
     {
         public TextMessageProfile()

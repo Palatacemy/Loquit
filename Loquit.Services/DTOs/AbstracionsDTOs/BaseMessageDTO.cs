@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace Loquit.Services.DTOs.AbstracionsDTOs
 {
+    //DTO for BaseMessage; inherits from BaseDTO
     public abstract class BaseMessageDTO : BaseDTO
     {
         public DateTime TimeOfSending { get; set; }

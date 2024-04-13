@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace Loquit.Services.DTOs.ChatTypesDTOs
 {
+    //DTO for GroupChat; inherits from BaseChatDTO
     public class GroupChatDTO : BaseChatDTO
     {
         public string GroupName { get; set; }

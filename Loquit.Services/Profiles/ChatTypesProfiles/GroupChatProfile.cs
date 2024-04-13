@@ -10,6 +10,7 @@ using Loquit.Services.DTOs.ChatTypesDTOs;
 
 namespace Loquit.Services.Profiles.ChatTypesProfiles
 {
+    //Profile for mapping GroupChat and its DTO
     public class GroupChatProfile : Profile
     {
         public GroupChatProfile()

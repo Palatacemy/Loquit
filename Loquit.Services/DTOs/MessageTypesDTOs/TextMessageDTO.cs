@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace Loquit.Services.DTOs.MessageTypesDTOs
 {
+    //DTO for TextMessage; inherits from BaseMessageDTO
     public class TextMessageDTO : BaseMessageDTO
     {
         public TextMessageDTO()

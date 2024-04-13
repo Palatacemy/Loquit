@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace Loquit.Services.Profiles
 {
+    //Profile for mapping Post and its DTO
     public class PostProfile : Profile
     {
         public PostProfile()

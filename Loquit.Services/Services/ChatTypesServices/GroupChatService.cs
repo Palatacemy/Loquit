@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 
 namespace Loquit.Services.Services.ChatTypesServices
 {
+    //service for group chats; inherits from IGroupChatService
     public class GroupChatService : IGroupChatService
     {
         private readonly ICrudRepository<GroupChat> _groupChatRepository;

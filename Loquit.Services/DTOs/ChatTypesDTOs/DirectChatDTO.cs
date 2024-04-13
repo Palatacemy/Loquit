@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace Loquit.Services.DTOs.ChatTypesDTOs
 {
+    //DTO for DirectChat; inherits from BaseChatDTO
     public class DirectChatDTO : BaseChatDTO
     {
 

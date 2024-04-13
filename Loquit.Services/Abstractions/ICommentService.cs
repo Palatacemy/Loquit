@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace Loquit.Services.Abstractions
 {
+    //interface for a Comment's service
     public interface ICommentService
     {
         Task<List<CommentDTO>> GetCommentsAsync();

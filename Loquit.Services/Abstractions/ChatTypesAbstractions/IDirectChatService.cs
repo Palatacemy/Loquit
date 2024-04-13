@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace Loquit.Services.Abstractions.ChatTypesAbstractions
 {
+    //interface for a DirectChat's service
     public interface IDirectChatService
     {
         Task<List<DirectChatDTO>> GetDirectChatsAsync();

@@ -9,12 +9,12 @@ using System.Threading.Tasks;
 
 namespace Loquit.Services.Profiles
 {
-    //Profile for mapping Comment and its DTO
-    public class CommentProfile : Profile
+    //Profile for mapping Dislike and its DTO
+    public class DislikeProfile : Profile
     {
-        public CommentProfile()
+        public DislikeProfile()
         {
-            CreateMap<Comment, CommentDTO>()
+            CreateMap<Dislike, DislikeDTO>()
                 .ReverseMap();
         }
     }

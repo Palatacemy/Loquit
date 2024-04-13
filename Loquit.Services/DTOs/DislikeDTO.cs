@@ -8,6 +8,7 @@ using Loquit.Services.DTOs.AbstracionsDTOs;
 
 namespace Loquit.Services.DTOs
 {
+    //DTO for Dislike; inherits from BaseDTO
     public class DislikeDTO : BaseDTO
     {
         public int PostId { get; set; }

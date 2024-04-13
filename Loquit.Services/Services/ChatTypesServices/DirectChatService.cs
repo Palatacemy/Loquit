@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 
 namespace Loquit.Services.Services.ChatTypesServices
 {
+    //service for direct chats; inherits from IDirectChatService
     public class DirectChatService : IDirectChatService
     {
         private readonly ICrudRepository<DirectChat> _directChatRepository;

@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 
 namespace Loquit.Services.Services.MessageTypesServices
 {
+    //service for image messages; inherits from IImageMessageService
     public class ImageMessageService : IImageMessageService
     {
         private readonly ICrudRepository<ImageMessage> _imageMessageRepository;

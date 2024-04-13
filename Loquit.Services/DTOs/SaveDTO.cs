@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace Loquit.Services.DTOs
 {
+    //DTO for Save; inherits from BaseDTO
     public class SaveDTO : BaseDTO
     {
         public int PostId { get; set; }

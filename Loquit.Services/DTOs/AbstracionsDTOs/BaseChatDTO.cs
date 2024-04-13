@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace Loquit.Services.DTOs.AbstracionsDTOs
 {
+    //DTO for BaseChat; inherits from BaseDTO
     public abstract class BaseChatDTO : BaseDTO
     {
         public virtual List<AppUser> Members { get; set; }

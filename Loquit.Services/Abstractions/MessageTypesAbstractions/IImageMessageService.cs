@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace Loquit.Services.Abstractions.MessageTypesAbstractions
 {
+    //interface for a ImageMessage's service
     public interface IImageMessageService
     {
         Task<List<ImageMessageDTO>> GetImageMessagesAsync();

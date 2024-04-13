@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace Loquit.Services.Services
 {
+    //service for users; inherits from IUserService
     public class UserService : IUserService
     {
         private readonly UserManager<AppUser> _userManager;

@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 
 namespace Loquit.Services.Services.MessageTypesServices
 {
+    //service for text messages; inherits from ITextMessageService
     public class TextMessageService : ITextMessageService
     {
         private readonly ICrudRepository<TextMessage> _textMessageRepository;

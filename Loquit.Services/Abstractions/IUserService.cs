@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace Loquit.Services.Abstractions
 {
+    //interface for a User's service
     public interface IUserService
     {
         Task<IdentityResult> CreateUserAsync(AppUser user, string password);

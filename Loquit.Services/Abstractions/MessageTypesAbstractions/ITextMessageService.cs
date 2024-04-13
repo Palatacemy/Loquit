@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace Loquit.Services.Abstractions.MessageTypesAbstractions
 {
+    //interface for a TextMessage's service
     public interface ITextMessageService
     {
         Task<List<TextMessageDTO>> GetTextMessagesAsync();

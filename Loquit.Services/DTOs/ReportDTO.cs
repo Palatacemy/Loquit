@@ -9,6 +9,7 @@ using Loquit.Services.DTOs.AbstracionsDTOs;
 
 namespace Loquit.Services.DTOs
 {
+    //DTO for Report; inherits from BaseDTO
     public class ReportDTO : BaseDTO
     {
         public string? ReportingUserId { get; set; }

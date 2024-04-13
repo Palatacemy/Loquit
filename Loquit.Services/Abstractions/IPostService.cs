@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace Loquit.Services.Abstractions
 {
+    //interface for a Post's service
     public interface IPostService
     {
         Task<List<PostDTO>> GetPostsAsync();

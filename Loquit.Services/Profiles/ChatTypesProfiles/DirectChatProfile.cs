@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 
 namespace Loquit.Services.Profiles.ChatTypesProfiles
 {
+    //Profile for mapping DirectChat and its DTO
     public class DirectChatProfile : Profile
     {
         public DirectChatProfile()

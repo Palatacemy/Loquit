@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 
 namespace Loquit.Services.Services
 {
+    //service for posts; inherits from IPostService
     public class PostService : IPostService
     {
         private readonly ICrudRepository<Post> _postRepository;

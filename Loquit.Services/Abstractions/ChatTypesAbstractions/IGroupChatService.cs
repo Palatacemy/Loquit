@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace Loquit.Services.Abstractions.ChatTypesAbstractions
 {
+    //interface for a GroupChat's service
     public interface IGroupChatService
     {
         Task<List<GroupChatDTO>> GetGroupChatsAsync();
