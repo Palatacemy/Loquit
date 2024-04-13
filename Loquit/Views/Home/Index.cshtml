@@ -29,20 +29,14 @@
                                 <div class="post-header-options d-flex justify-content-between flex-row gap-2">
                                     @if(currentUser != null)
                                     {
-                                        if (item.LikedBy.Any(el => el.UserId == currentUser.Id))
-                                        {
-                                            <a class="post-header-option">
-                                                <img class="option like" src="~/img/Like.png" loading="lazy" />
-                                                <div>@item.LikedBy.Count</div>
-                                            </a>
-                                        }
-                                        else
-                                        {
-                                            <a asp-action="Like" asp-controller="Posts" asp-route-id="@item.Id" class="post-header-option">
-                                                <img class="option like" src="~/img/Like.png" loading="lazy" />
-                                                <div>@item.LikedBy.Count</div>
-                                            </a>
-                                        }
+                                        <a asp-action="Like" asp-controller="Posts" asp-route-id="@item.Id" class="post-header-option">
+                                            <img class="option like" src="~/img/Like.png" loading="lazy" />
+                                            <div>@item.LikedBy.Count</div>
+                                        </a>
+                                        <a asp-action="Dislike" asp-controller="Posts" asp-route-id="@item.Id" class="post-header-option">
+                                            <img class="option dislike" src="~/img/Like.png" loading="lazy" />
+                                            <div>@item.DislikedBy.Count</div>
+                                        </a>
                                     }
                                     else
                                     {
@@ -50,12 +44,13 @@
                                             <img class="option like" src="~/img/Like.png" loading="lazy" />
                                             <div>@item.LikedBy.Count</div>
                                         </a>
+                                        <a class="post-header-option">
+                                            <img class="option dislike" src="~/img/Like.png" loading="lazy" />
+                                            <div>@item.DislikedBy.Count</div>
+                                        </a>
                                     }
 
-                                    <a asp-action="Dislike" class="post-header-option">
-                                        <img class="option dislike" src="~/img/Like.png" loading="lazy" />
-                                        <div>@item.DislikedBy.Count</div>
-                                    </a>
+                                    
                                     <a asp-area="" asp-controller="Posts" asp-action="Details" asp-route-id="@item.Id" class="post-header-option">
                                         <img class="option comment" src="~/img/Comment.png" loading="lazy" />
                                         <div>@item.Comments.Count</div>
@@ -79,9 +74,12 @@
                             </a>
                         </div>
                     </div>
-                    <a asp-area="" asp-controller="Posts" asp-action="Details" asp-route-id="@item.Id">
-                        <img class="post-image" src="~/uploads/@item.PictureUrl" loading="lazy" />
-                    </a>
+                    @if (@item.PictureUrl != null)
+                    {
+                        <a asp-area="" asp-controller="Posts" asp-action="Details" asp-route-id="@item.Id">
+                            <img class="post-image" src="~/uploads/@item.PictureUrl" loading="lazy" />
+                        </a>
+                    }
                 </div>
             }
         </div>

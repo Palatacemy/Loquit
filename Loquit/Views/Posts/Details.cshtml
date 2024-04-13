@@ -9,7 +9,9 @@
 @inject UserManager<AppUser> UserManager
 
 
-<h1>Details</h1>
+@{
+    var currentUser = await UserManager.GetUserAsync(User);
+}
 
 <div class="form-container-content">
     <div class="row">
@@ -22,18 +24,32 @@
                         <div class="post-header-text">
                             <div class="post-header-info d-flex flex-row justify-content-between">
                                 <a asp-area="" asp-controller="Home" asp-action="Index" class="post-user d-flex flex-row">
-                                    <span class="pfp pfp-small"><img src="@Model.PictureUrl" loading="lazy" /></span>
+                                    <span class="pfp pfp-small"><img src="~/@creator.ProfilePictureUrl" loading="lazy" /></span>
                                     <span class="post-name">@creator.UserName</span>
                                 </a>
                                 <div class="post-header-options d-flex justify-content-between flex-row gap-2">
-                                    <div class="post-header-option">
-                                        <img class="option like" src="~/img/Like.png" loading="lazy" />
-                                        <div>@Model.LikedBy.Count</div>
-                                    </div>
-                                    <div class="post-header-option">
-                                        <img class="option dislike" src="~/img/Like.png" loading="lazy" />
-                                        <div>@Model.DislikedBy.Count</div>
-                                    </div>
+                        @if (currentUser != null)
+                        {
+                            <a asp-action="Like" asp-controller="Posts" asp-route-id="@Model.Id" class="post-header-option">
+                                <img class="option like" src="~/img/Like.png" loading="lazy" />
+                                <div>@Model.LikedBy.Count</div>
+                            </a>
+                            <a asp-action="Dislike" asp-controller="Posts" asp-route-id="@Model.Id" class="post-header-option">
+                                <img class="option dislike" src="~/img/Like.png" loading="lazy" />
+                                <div>@Model.DislikedBy.Count</div>
+                            </a>
+                        }
+                        else
+                        {
+                            <a class="post-header-option">
+                                <img class="option like" src="~/img/Like.png" loading="lazy" />
+                                <div>@Model.LikedBy.Count</div>
+                            </a>
+                            <a class="post-header-option">
+                                <img class="option dislike" src="~/img/Like.png" loading="lazy" />
+                                <div>@Model.DislikedBy.Count</div>
+                            </a>
+                        }
                                     <div class="post-header-option">
                                         <img class="option comment" src="~/img/Comment.png" loading="lazy" />
                                     <div>@Model.Comments.Count</div>
@@ -58,7 +74,11 @@
                         </div>
                     </div>
                      <div>
-                    <img class="post-image" src="@Model.PictureUrl" loading="lazy" />
+            @if (Model.PictureUrl != null)
+            {
+                <img class="post-image2" src="~/uploads/@Model.PictureUrl" loading="lazy" />
+            }
+                        
                     </div>
         <div class="body-text">
             @Model.BodyText

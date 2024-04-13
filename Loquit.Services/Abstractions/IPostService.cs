@@ -16,5 +16,6 @@ namespace Loquit.Services.Abstractions
         Task DeletePostByIdAsync(int id);
         Task UpdatePostAsync(PostDTO post);
         Task LikePost(int id, string userId);
+        Task DislikePost(int id, string userId);
     }
 }

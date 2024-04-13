@@ -40,8 +40,18 @@ namespace Loquit.Web.Controllers
             var userId = (await _userManager.GetUserAsync(User)).Id;
 
             await _postService.LikePost(id, userId);
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Details", "Posts", new { id = id });
         }
+
+        [HttpGet("/Dislike/{id}")]
+        public async Task<IActionResult> Dislike(int id)
+        {
+            var userId = (await _userManager.GetUserAsync(User)).Id;
+
+            await _postService.DislikePost(id, userId);
+            return RedirectToAction("Details", "Posts", new { id = id });
+        }
+
 
         // GET: Posts/Details/5
         public async Task<IActionResult> Details(int? id)

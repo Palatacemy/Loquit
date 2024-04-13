@@ -230,6 +230,13 @@ button.show {
     object-fit: cover;
     border-radius: 1rem;
 }
+.post-image2 {
+    width: 98%;
+    margin: 1%;
+    object-fit: cover;
+    border-radius: 1rem;
+}
+
 
 .dropdown-menu {
     border: solid var(--logoB) 2px;
