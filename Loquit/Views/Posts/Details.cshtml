@@ -30,14 +30,34 @@
                                 <div class="post-header-options d-flex justify-content-between flex-row gap-2">
                         @if (currentUser != null)
                         {
-                            <a asp-action="Like" asp-controller="Posts" asp-route-id="@Model.Id" class="post-header-option">
-                                <img class="option like" src="~/img/Like.png" loading="lazy" />
-                                <div>@Model.LikedBy.Count</div>
-                            </a>
-                            <a asp-action="Dislike" asp-controller="Posts" asp-route-id="@Model.Id" class="post-header-option">
-                                <img class="option dislike" src="~/img/Like.png" loading="lazy" />
-                                <div>@Model.DislikedBy.Count</div>
-                            </a>
+                            if (Model.LikedBy.Any(el => el.UserId == currentUser.Id))
+                            {
+                                <a asp-action="Like" asp-controller="Posts" asp-route-id="@Model.Id" class="post-header-option">
+                                    <img class="option like" src="~/img/LikeFull.png" loading="lazy" />
+                                    <div>@Model.LikedBy.Count</div>
+                                </a>
+                            }
+                            else
+                            {
+                                <a asp-action="Like" asp-controller="Posts" asp-route-id="@Model.Id" class="post-header-option">
+                                    <img class="option like" src="~/img/Like.png" loading="lazy" />
+                                    <div>@Model.LikedBy.Count</div>
+                                </a>
+                            }
+                            if (Model.DislikedBy.Any(el => el.UserId == currentUser.Id))
+                            {
+                                <a asp-action="Dislike" asp-controller="Posts" asp-route-id="@Model.Id" class="post-header-option">
+                                    <img class="option dislike" src="~/img/LikeFull.png" loading="lazy" />
+                                    <div>@Model.DislikedBy.Count</div>
+                                </a>
+                            }
+                            else
+                            {
+                                <a asp-action="Dislike" asp-controller="Posts" asp-route-id="@Model.Id" class="post-header-option">
+                                    <img class="option dislike" src="~/img/Like.png" loading="lazy" />
+                                    <div>@Model.DislikedBy.Count</div>
+                                </a>
+                            }
                         }
                         else
                         {
