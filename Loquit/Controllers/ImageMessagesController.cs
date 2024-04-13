@@ -24,7 +24,7 @@ namespace Loquit.Web.Controllers
         // GET: ImageMessages
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.ImageMessages.Include(i => i.Parent).Include(i => i.SenderUser);
+            var applicationDbContext = _context.ImageMessages.Include(i => i.SenderUser);
             return View(await applicationDbContext.ToListAsync());
         }
 
@@ -37,7 +37,6 @@ namespace Loquit.Web.Controllers
             }
 
             var imageMessage = await _context.ImageMessages
-                .Include(i => i.Parent)
                 .Include(i => i.SenderUser)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (imageMessage == null)
@@ -69,7 +68,6 @@ namespace Loquit.Web.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ParentId"] = new SelectList(_context.Set<BaseMessage>(), "Id", "Discriminator", imageMessage.ParentId);
             ViewData["SenderUserId"] = new SelectList(_context.Set<AppUser>(), "Id", "Id", imageMessage.SenderUserId);
             return View(imageMessage);
         }
@@ -87,7 +85,6 @@ namespace Loquit.Web.Controllers
             {
                 return NotFound();
             }
-            ViewData["ParentId"] = new SelectList(_context.Set<BaseMessage>(), "Id", "Discriminator", imageMessage.ParentId);
             ViewData["SenderUserId"] = new SelectList(_context.Set<AppUser>(), "Id", "Id", imageMessage.SenderUserId);
             return View(imageMessage);
         }
@@ -124,7 +121,6 @@ namespace Loquit.Web.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ParentId"] = new SelectList(_context.Set<BaseMessage>(), "Id", "Discriminator", imageMessage.ParentId);
             ViewData["SenderUserId"] = new SelectList(_context.Set<AppUser>(), "Id", "Id", imageMessage.SenderUserId);
             return View(imageMessage);
         }
@@ -138,7 +134,6 @@ namespace Loquit.Web.Controllers
             }
 
             var imageMessage = await _context.ImageMessages
-                .Include(i => i.Parent)
                 .Include(i => i.SenderUser)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (imageMessage == null)

@@ -24,7 +24,7 @@ namespace Loquit.Web.Controllers
         // GET: TextMessages
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.TextMessages.Include(t => t.Parent).Include(t => t.SenderUser);
+            var applicationDbContext = _context.TextMessages.Include(t => t.SenderUser);
             return View(await applicationDbContext.ToListAsync());
         }
 
@@ -37,7 +37,6 @@ namespace Loquit.Web.Controllers
             }
 
             var textMessage = await _context.TextMessages
-                .Include(t => t.Parent)
                 .Include(t => t.SenderUser)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (textMessage == null)
@@ -69,7 +68,6 @@ namespace Loquit.Web.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ParentId"] = new SelectList(_context.Set<BaseMessage>(), "Id", "Discriminator", textMessage.ParentId);
             ViewData["SenderUserId"] = new SelectList(_context.Set<AppUser>(), "Id", "Id", textMessage.SenderUserId);
             return View(textMessage);
         }
@@ -87,7 +85,6 @@ namespace Loquit.Web.Controllers
             {
                 return NotFound();
             }
-            ViewData["ParentId"] = new SelectList(_context.Set<BaseMessage>(), "Id", "Discriminator", textMessage.ParentId);
             ViewData["SenderUserId"] = new SelectList(_context.Set<AppUser>(), "Id", "Id", textMessage.SenderUserId);
             return View(textMessage);
         }
@@ -124,7 +121,6 @@ namespace Loquit.Web.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ParentId"] = new SelectList(_context.Set<BaseMessage>(), "Id", "Discriminator", textMessage.ParentId);
             ViewData["SenderUserId"] = new SelectList(_context.Set<AppUser>(), "Id", "Id", textMessage.SenderUserId);
             return View(textMessage);
         }
@@ -138,7 +134,6 @@ namespace Loquit.Web.Controllers
             }
 
             var textMessage = await _context.TextMessages
-                .Include(t => t.Parent)
                 .Include(t => t.SenderUser)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (textMessage == null)

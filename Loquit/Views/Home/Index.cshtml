@@ -4,7 +4,8 @@
 <div class="main-container d-flex justify-content-center">
     <div class="left-container">
         <div class="lr-container-content">
-            @for (int i = 0; i < 10; i++)
+@*             @for (int i = 0; i < 20; i++)
+ *@            @foreach (var item in Model)
             {
                     <div class="post container-fluid d-flex justify-content-center flex-column">
                         <div class="post-header d-flex justify-content-between flex-row">
@@ -44,7 +45,7 @@
                                 fbh trf bhtrf bhg rdgetrsg e rihgerjagnrek gre sdgfdasgdfsg d fkjgjfds gkfdkjg kaflg hsah gsda glsflakdh glakfsdjg hlnafjk gjkfd gkfsag khfas gjksa dfgsjkg kjamfg
                             </div>
                         </div>
-                        <a asp-area="" asp-controller="Post" asp-action="Details" asp-route-id="@i">
+                        <a asp-area="" asp-controller="Post" asp-action="Details" asp-route-id="">
                         <img class="post-image" src="https://media.discordapp.net/attachments/1180581339444019262/1187136457891127418/2Q.png?ex=6620377b&is=660dc27b&hm=293dbfb407040f4f5d6aada9e0baf49261018f25ff6be54e5692683edac49897&=&format=webp&quality=lossless" loading="lazy" />
                         </a>
                     </div>

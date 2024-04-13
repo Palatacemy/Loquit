@@ -1,4 +1,5 @@
 using Loquit.Models;
+using Loquit.Services.Abstractions;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -7,15 +8,18 @@ namespace Loquit.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly IPostService _postService;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(IPostService postService, ILogger<HomeController> logger)
         {
             _logger = logger;
+            _postService = postService;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+
+            return View(await _postService.GetPostsAsync());
         }
 
         public IActionResult Privacy()
