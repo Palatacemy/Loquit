@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Loquit.Data.Entities.Abstractions
 {
+    //abstraction for all direct chats
     public abstract class BaseChat : BaseEntity
     {
         public virtual List<AppUser> Members { get; set; }

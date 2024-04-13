@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace Loquit.Data.Repositories
 {
+    //basic CRUD methods
     public class CrudRepository<T> : ICrudRepository<T>
         where T : BaseEntity
     {

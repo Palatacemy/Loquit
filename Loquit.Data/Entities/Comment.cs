@@ -9,6 +9,7 @@ namespace Loquit.Data.Entities
 {
     public class Comment : BaseEntity
     {
+        //a comment to a post
         public Comment()
         {
             LikedBy = new HashSet<Like>();

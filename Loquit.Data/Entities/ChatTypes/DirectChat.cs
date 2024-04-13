@@ -9,6 +9,6 @@ namespace Loquit.Data.Entities.ChatTypes
 {
     public class DirectChat : BaseChat
     {
-
+        //a unique chat between two users
     }
 }

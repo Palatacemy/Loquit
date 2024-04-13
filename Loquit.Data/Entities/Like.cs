@@ -9,6 +9,7 @@ namespace Loquit.Data.Entities
 {
     public class Like : BaseEntity
     {
+        //represents a single like of a post or comment
         public int? PostId { get; set; }
         public virtual Post? Post { get; set; }
         public int? CommentId { get; set; }
