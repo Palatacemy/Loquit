@@ -25,7 +25,7 @@
 
 body {
     background-color: var(--left);
-    background-image: url("../img/LoquitBGLight.jpg");
+    background-image: url("../img/LoquitBGDark.jpg");
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;

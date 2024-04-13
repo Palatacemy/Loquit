@@ -9,7 +9,7 @@
     @inject SignInManager<IdentityUser> SignInManager
     @inject UserManager<IdentityUser> UserManager
     @{
-        int theme = 3;
+        int theme = 1;
         if (SignInManager.IsSignedIn(User))
         {
             var user = UserManager.GetUserAsync(User);

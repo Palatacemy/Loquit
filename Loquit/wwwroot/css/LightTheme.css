@@ -96,6 +96,7 @@ label {
     border: solid var(--logoA) 2px;
     border-radius: 1rem 0 1rem 1rem;
     padding: 12px;
+    overflow: hidden;
 }
 
 .post-header {
@@ -370,6 +371,7 @@ button.show {
     background-color: var(--right);
     border-radius: 20px;
     border: 1px var(--logoA) solid;
+    overflow: hidden;
 }
 
 .form-container-content > .row {
@@ -437,7 +439,7 @@ textarea.form-control {
     justify-content: center;
     flex-direction: column;
     max-width: 50rem;
-
+    overflow: hidden;
 }
 
 .comment-container {
