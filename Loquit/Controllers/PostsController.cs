@@ -18,10 +18,10 @@ namespace Loquit.Web.Controllers
     public class PostsController : Controller
     {
         private readonly IPostService _postService;
-        private readonly UserManager<IdentityUser> _userManager;
+        private readonly UserManager<AppUser> _userManager;
         private readonly IWebHostEnvironment _environment;
 
-        public PostsController(IPostService postService, IWebHostEnvironment environment, UserManager<IdentityUser> userManager)
+        public PostsController(IPostService postService, IWebHostEnvironment environment, UserManager<AppUser> userManager)
         {
             _postService = postService;
             _environment = environment;
@@ -32,6 +32,15 @@ namespace Loquit.Web.Controllers
         public async Task<IActionResult> Index()
         {
             return View(await _postService.GetPostsAsync());
+        }
+
+        [HttpGet("/Like/{id}")]
+        public async Task<IActionResult> Like(int id)
+        {
+            var userId = (await _userManager.GetUserAsync(User)).Id;
+
+            await _postService.LikePost(id, userId);
+            return RedirectToAction("Index", "Home");
         }
 
         // GET: Posts/Details/5
@@ -54,7 +63,13 @@ namespace Loquit.Web.Controllers
         // GET: Posts/Create
         public async Task<IActionResult> Create()
         {
-            return View();
+            var userId = (await _userManager.GetUserAsync(User)).Id;
+
+            var model = new PostCreateViewModel()
+            {
+                CreatorId = userId
+            };
+            return View(model);
         }
 
         // POST: Posts/Create
@@ -64,18 +79,16 @@ namespace Loquit.Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(PostCreateViewModel post)
         {
-            if (!ModelState.IsValid)
+            if (ModelState.IsValid)
             {
-                var currentUser = await _userManager.GetUserAsync(User);
                 if (post.Picture != null && post.Picture.Length > 0)
                 {
                     var newFileName = await FileUpload.UploadAsync(post.Picture, _environment.WebRootPath);
                     post.PictureUrl = newFileName;
                 }
-                post.CreatorId = currentUser.Id;
                 post.TimeOfPosting = DateTime.Now;
                 await _postService.AddPostAsync(post);
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index", "Home");
             }
             return View(post);
         }

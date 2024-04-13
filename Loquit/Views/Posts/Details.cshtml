@@ -1,11 +1,12 @@
-﻿@using Microsoft.AspNetCore.Identity
+﻿@using Loquit.Data.Entities
+@using Microsoft.AspNetCore.Identity
 @model Loquit.Services.DTOs.PostDTO
 
 @{
     ViewData["Title"] = "Details";
 }
 
-@inject UserManager<IdentityUser> UserManager
+@inject UserManager<AppUser> UserManager
 
 
 <h1>Details</h1>

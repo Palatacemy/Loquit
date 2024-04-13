@@ -14,10 +14,12 @@ namespace Loquit.Services.Services
     public class PostService : IPostService
     {
         private readonly ICrudRepository<Post> _postRepository;
+        private readonly ICrudRepository<Like> _likeRepository;
         private readonly IMapper _mapper;
-        public PostService(ICrudRepository<Post> postRepository, IMapper mapper)
+        public PostService(ICrudRepository<Post> postRepository, ICrudRepository<Like> likeRepository, IMapper mapper)
         {
             _postRepository = postRepository;
+            _likeRepository = likeRepository;
             _mapper = mapper;
         }
 
@@ -52,6 +54,20 @@ namespace Loquit.Services.Services
             var posts = (await _postRepository.GetAsync(item => item.Title == title))
                 .ToList();
             return _mapper.Map<List<PostDTO>>(posts);
+        }
+
+        public async Task LikePost(int postId, string userId)
+        {
+            var hasLike = await _likeRepository.GetAsync(item => item.PostId == postId && item.UserId == userId);
+            if(hasLike.Count() == 0)
+            {
+                var like = new Like()
+                {
+                    UserId = userId,
+                    PostId = postId
+                };
+                await _likeRepository.AddAsync(like);
+            }
         }
 
         public async Task UpdatePostAsync(PostDTO model)

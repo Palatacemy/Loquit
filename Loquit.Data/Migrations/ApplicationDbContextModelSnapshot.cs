@@ -176,10 +176,10 @@ namespace Loquit.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("CommentId")
+                    b.Property<int?>("CommentId")
                         .HasColumnType("int");
 
-                    b.Property<int>("PostId")
+                    b.Property<int?>("PostId")
                         .HasColumnType("int");
 
                     b.Property<string>("UserId")
@@ -655,15 +655,12 @@ namespace Loquit.Data.Migrations
                 {
                     b.HasOne("Loquit.Data.Entities.Comment", "Comment")
                         .WithMany("LikedBy")
-                        .HasForeignKey("CommentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("CommentId");
 
                     b.HasOne("Loquit.Data.Entities.Post", "Post")
                         .WithMany("LikedBy")
                         .HasForeignKey("PostId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("Loquit.Data.Entities.AppUser", "User")
                         .WithMany("LikedPosts")
