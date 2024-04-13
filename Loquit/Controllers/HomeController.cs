@@ -26,6 +26,11 @@ namespace Loquit.Controllers
         {
             return View();
         }
+        public void Like(int id)
+        {
+
+        }
+
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

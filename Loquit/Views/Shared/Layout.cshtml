@@ -5,8 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>@ViewData["Title"] - Loquit</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    @using Microsoft.AspNetCore.Identity
+    @inject SignInManager<IdentityUser> SignInManager
+    @inject UserManager<IdentityUser> UserManager
     @{
-        int theme = 1;
+        int theme = 3;
+        if (SignInManager.IsSignedIn(User))
+        {
+            var user = UserManager.GetUserAsync(User);
+            //theme = user.ThemeId;
+        }
+
     }
     @if (theme == 1)
     {
