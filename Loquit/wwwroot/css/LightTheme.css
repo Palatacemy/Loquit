@@ -103,6 +103,11 @@ label {
     margin: 1% 1% 0;
 }
 
+.post-header2 {
+    width: 100%;
+    margin-top: 1%;
+}
+
 .post-header-info {
     margin-bottom: 10px;
 }
@@ -297,6 +302,7 @@ button.show {
     display: flex;
     justify-content: center;
     background-color: var(--left);
+    color: var(--text);
 }
 
     .post-search-btn:hover > .btn-image {
@@ -417,4 +423,67 @@ textarea {
 
 textarea.form-control {
     min-height: 7rem;
+}
+
+.title {
+    font-size: 1.5rem;
+}
+
+/* ------ Comments ------ */
+
+.comments-container {
+    margin: 0 auto auto auto;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    max-width: 50rem;
+
+}
+
+.comment-container {
+    margin: 1rem;
+    background-color: var(--right);
+    border-radius: 20px;
+    border: 1px var(--logoA) solid;
+    padding: 1rem;
+}
+
+.write-comment {
+    margin-top: 1rem;
+}
+
+.write-comment-btn {
+    height: 4rem;
+    width: 5rem;
+    border: 0;
+    border-radius: 0 1rem 1rem 0;
+    outline: none !important;
+    box-shadow: none !important;
+    display: flex;
+    justify-content: center;
+    background-color: var(--right);
+    color: var(--text);
+    border-top: 1px var(--logoA) solid;
+    border-bottom: 1px var(--logoA) solid;
+    border-right: 1px var(--logoA) solid;
+}
+
+.write-comment-btn > div {
+    margin: auto;
+}
+
+.write-comment-bar {
+    min-height: 4rem !important;
+    background-color: var(--right) !important;
+    border-radius: 1rem 0 0 1rem !important;
+    width: 43rem;
+    border-left: 1px var(--logoA) solid;
+    border-top: 1px var(--logoA) solid;
+    border-bottom: 1px var(--logoA) solid;
+    padding: 0 0.5rem;
+}
+
+
+.body-text {
+    margin-bottom: 1%;
 }

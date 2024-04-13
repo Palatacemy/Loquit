@@ -17,7 +17,7 @@
             }
 
                 
-                    <div class="post-header d-flex justify-content-between flex-row">
+                    <div class="post-header2 d-flex justify-content-between flex-row">
                         <div class="post-header-text">
                             <div class="post-header-info d-flex flex-row justify-content-between">
                                 <a asp-area="" asp-controller="Home" asp-action="Index" class="post-user d-flex flex-row">
@@ -51,51 +51,62 @@
                                     </div>
                                 </div>
                             </div>
-                            <a asp-area="" asp-controller="Posts" asp-action="Details" asp-route-id="@Model.Id">
+                            <div>
                                 @Model.Title
-                            </a>
+                            </div>
                         </div>
                     </div>
-                     <a asp-area="" asp-controller="Posts" asp-action="Details" asp-route-id="@Model.Id">
+                     <div>
                     <img class="post-image" src="@Model.PictureUrl" loading="lazy" />
-                    </a>
+                    </div>
+        <div class="body-text">
+            @Model.BodyText
+        </div>
                     
             </div>
-            <hr />
-            @for (int i = 0; i < 20; i++ ) {
-                <div class="post-header d-flex justify-content-between flex-row">
-                        <div class="post-header-text">
-                            <div class="post-header-info d-flex flex-row justify-content-between">
-                                <a asp-area="" asp-controller="Home" asp-action="Index" class="post-user d-flex flex-row">
-                                    <span class="pfp pfp-small"><img src="@Model.PictureUrl" loading="lazy" /></span>
-                                    <span class="post-name">@creator.UserName</span>
-                                </a>
-                                <div class="post-header-options d-flex justify-content-between flex-row gap-2">
-                                    <div class="post-header-option">
-                                        <img class="option like" src="~/img/Like.png" loading="lazy" />
-                                        <div>@Model.LikedBy.Count</div>
-                                    </div>
-                                    <div class="post-header-option">
-                                        <img class="option dislike" src="~/img/Like.png" loading="lazy" />
-                                        <div>@Model.DislikedBy.Count</div>
-                                    </div>
-                                    <div class="post-header-more">
-                                        <div class="dropdown">
-                                            <button class="more-btn btn btn-secondary" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                                                <img class="more" src="~/img/more.png" loading="lazy" />
-                                            </button>
-                                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                                <li><a class="dropdown-item" href="#">Block User</a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                   
+            
+    </div>
+<div class="write-comment d-flex justify-content-center flex-row">
+    <div>
+        <textarea oninput="auto_grow(this)" TextMode="MultiLine" class="write-comment-bar"></textarea>
+    </div>
+    <button type="submit" class="normal-btn write-comment-btn btn"><div>Create</div></button>
+</div>
+<div class="comments-container">
+    @for (int i = 0; i < 20; i++)
+    {
+        <div class="comment-container d-flex justify-content-between flex-row">
+            <div class="post-header-text">
+                <div class="post-header-info d-flex flex-row justify-content-between">
+                    <a asp-area="" asp-controller="Home" asp-action="Index" class="post-user d-flex flex-row">
+                        <span class="pfp pfp-small"><img src="@Model.PictureUrl" loading="lazy" /></span>
+                        <span class="post-name">@creator.UserName</span>
+                    </a>
+                    <div class="post-header-options d-flex justify-content-between flex-row gap-2">
+                        <div class="post-header-option">
+                            <img class="option like" src="~/img/Like.png" loading="lazy" />
+                            <div>@Model.LikedBy.Count</div>
+                        </div>
+                        <div class="post-header-option">
+                            <img class="option dislike" src="~/img/Like.png" loading="lazy" />
+                            <div>@Model.DislikedBy.Count</div>
+                        </div>
+                        <div class="post-header-more">
+                            <div class="dropdown">
+                                <button class="more-btn btn btn-secondary" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <img class="more" src="~/img/more.png" loading="lazy" />
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                    <li><a class="dropdown-item" href="#">Block User</a></li>
+                                </ul>
                             </div>
-                <a asp-area="" asp-controller="Posts" asp-action="Details" asp-route-id="@Model.Id">
-                    @Model.Title
-                </a>
                         </div>
                     </div>
-            }
-    </div>
+                </div>
+                <div asp-area="" asp-controller="Posts" asp-action="Details" asp-route-id="@Model.Id">
+                    @Model.Title
+                </div>
+            </div>
+        </div>
+    }
+</div>
