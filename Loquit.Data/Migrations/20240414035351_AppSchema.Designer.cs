@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Loquit.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240413200552_newM")]
-    partial class newM
+    [Migration("20240414035351_AppSchema")]
+    partial class AppSchema
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -118,7 +118,7 @@ namespace Loquit.Data.Migrations
                     b.Property<int>("Likes")
                         .HasColumnType("int");
 
-                    b.Property<int>("ParentId")
+                    b.Property<int?>("ParentId")
                         .HasColumnType("int");
 
                     b.Property<int>("PostId")
@@ -611,8 +611,7 @@ namespace Loquit.Data.Migrations
                     b.HasOne("Loquit.Data.Entities.Comment", "Parent")
                         .WithMany("Replies")
                         .HasForeignKey("ParentId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("Loquit.Data.Entities.Post", "Post")
                         .WithMany("Comments")
