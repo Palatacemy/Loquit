@@ -125,6 +125,7 @@ namespace Loquit.Web.Controllers
                 IsSpoiler = post.IsSpoiler,
                 IsNsfw = post.IsNsfw,
                 CreatorId = post.CreatorId,
+                TimeOfPosting = post.TimeOfPosting,
             };
 
             return View(model);
@@ -146,10 +147,6 @@ namespace Loquit.Web.Controllers
                 {
                     var newFileName = await FileUpload.UploadAsync(post.Picture, _environment.WebRootPath);
                     post.PictureUrl = newFileName;
-                }
-                else
-                {
-
                 }
                 post.IsEdited = true;
                 try
