@@ -30,7 +30,7 @@ namespace Loquit.Data.Entities
         public virtual Post? Post { get; set; }
         public int PostId { get; set; }
         public virtual Comment? Parent { get; set; }
-        public int ParentId { get; set; }
+        public int? ParentId { get; set; }
         public virtual ICollection<Comment>? Replies { get; set; }
     }
 }

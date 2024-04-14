@@ -115,7 +115,7 @@ namespace Loquit.Data.Migrations
                     b.Property<int>("Likes")
                         .HasColumnType("int");
 
-                    b.Property<int>("ParentId")
+                    b.Property<int?>("ParentId")
                         .HasColumnType("int");
 
                     b.Property<int>("PostId")
@@ -608,8 +608,7 @@ namespace Loquit.Data.Migrations
                     b.HasOne("Loquit.Data.Entities.Comment", "Parent")
                         .WithMany("Replies")
                         .HasForeignKey("ParentId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("Loquit.Data.Entities.Post", "Post")
                         .WithMany("Comments")

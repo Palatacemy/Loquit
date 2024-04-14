@@ -29,7 +29,7 @@ namespace Loquit.Services.DTOs
         public virtual Post? Post { get; set; }
         public int PostId { get; set; }
         public virtual Comment? Parent { get; set; }
-        public int ParentId { get; set; }
+        public int? ParentId { get; set; }
         public List<Comment>? Replies { get; set; }
     }
 }

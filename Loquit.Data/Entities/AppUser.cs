@@ -27,7 +27,7 @@ namespace Loquit.Data.Entities
             ColorThemeId = 1;
             FriendRequestsSent = new HashSet<AppUser>();
             FriendRequestsReceived = new HashSet<AppUser>();
-            ProfilePictureUrl = "img/user.png";
+            ProfilePictureUrl = "user.png";
         }
         public string? FirstName { get; set; }
         public string? LastName { get; set; }

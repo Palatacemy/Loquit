@@ -16,10 +16,16 @@ namespace Loquit.Controllers
             _postService = postService;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string searchQuery)
         {
-
-            return View(await _postService.GetPostsAsync());
+            if (!string.IsNullOrEmpty(searchQuery))
+            {
+                return View(await _postService.GetPostsWithTitleAsync(searchQuery));
+            }
+            else
+            {
+                return View(await _postService.GetPostsAsync());
+            }
         }
 
         public IActionResult Privacy()

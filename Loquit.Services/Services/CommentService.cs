@@ -14,10 +14,14 @@ namespace Loquit.Services.Services
     public class CommentService : ICommentService
     {
         private readonly ICrudRepository<Comment> _commentRepository;
+        private readonly ICrudRepository<Like> _likeRepository;
+        private readonly ICrudRepository<Dislike> _dislikeRepository;
         private readonly IMapper _mapper;
-        public CommentService(ICrudRepository<Comment> commentRepository, IMapper mapper)
+        public CommentService(ICrudRepository<Comment> commentRepository, ICrudRepository<Like> likeRepository, ICrudRepository<Dislike> dislikeRepository, IMapper mapper)
         {
             _commentRepository = commentRepository;
+            _likeRepository = likeRepository;
+            _dislikeRepository = dislikeRepository;
             _mapper = mapper;
         }
 
@@ -54,6 +58,52 @@ namespace Loquit.Services.Services
             return _mapper.Map<List<CommentDTO>>(comments);
         }
 
+        public async Task LikePost(int commentId, string userId)
+        {
+            var hasLike = await _likeRepository.GetAsync(item => item.CommentId == commentId && item.UserId == userId);
+            if (hasLike.Count() == 0)
+            {
+                var hasDislike = await _dislikeRepository.GetAsync(item => item.CommentId == commentId && item.UserId == userId);
+                if (hasDislike.Count() != 0)
+                {
+                    await _dislikeRepository.DeleteByIdAsync(hasDislike.First().Id);
+                }
+                var like = new Like()
+                {
+                    UserId = userId,
+                    CommentId = commentId
+                };
+                await _likeRepository.AddAsync(like);
+            }
+            else
+            {
+                await _likeRepository.DeleteByIdAsync(hasLike.First().Id);
+            }
+        }
+
+        public async Task DislikePost(int commentId, string userId)
+        {
+            var hasDislike = await _dislikeRepository.GetAsync(item => item.CommentId == commentId && item.UserId == userId);
+            if (hasDislike.Count() == 0)
+            {
+                var hasLike = await _likeRepository.GetAsync(item => item.CommentId == commentId && item.UserId == userId);
+                if (hasLike.Count() != 0)
+                {
+                    await _likeRepository.DeleteByIdAsync(hasLike.First().Id);
+                }
+                var dislike = new Dislike()
+                {
+                    UserId = userId,
+                    CommentId = commentId
+                };
+                await _dislikeRepository.AddAsync(dislike);
+            }
+            else
+            {
+                await _dislikeRepository.DeleteByIdAsync(hasDislike.First().Id);
+            }
+
+        }
         public async Task UpdateCommentAsync(CommentDTO model)
         {
             var comment = _mapper.Map<Comment>(model);

@@ -7,26 +7,35 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Loquit.Data;
 using Loquit.Data.Entities;
+using Loquit.Utils;
+using Microsoft.Extensions.Hosting;
+using Loquit.Services.Abstractions;
+using Loquit.Services.DTOs;
+using Microsoft.AspNetCore.Identity;
+using Loquit.Services.Services;
 
 namespace Loquit.Web.Controllers
 {
+
     public class CommentsController : Controller
     {
-        private readonly ApplicationDbContext _context;
+        private readonly ICommentService _commentService;
+        private readonly UserManager<AppUser> _userManager;
 
-        public CommentsController(ApplicationDbContext context)
+        public CommentsController(ICommentService commentService, UserManager<AppUser> userManager)
         {
-            _context = context;
+            _commentService = commentService;
+            _userManager = userManager;
         }
 
         // GET: Comments
-        public async Task<IActionResult> Index()
+        /*public async Task<IActionResult> Index()
         {
             return View(await _context.Comments.ToListAsync());
-        }
+        }*/
 
         // GET: Comments/Details/5
-        public async Task<IActionResult> Details(int? id)
+        /*public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
             {
@@ -41,9 +50,27 @@ namespace Loquit.Web.Controllers
             }
 
             return View(comment);
-        }
+        }*/
 
         // GET: Comments/Create
+
+        [HttpGet("/LikeComment/{id}")]
+        public async Task<IActionResult> LikeComment(int id)
+        {
+            var userId = (await _userManager.GetUserAsync(User)).Id;
+            int back = (await _commentService.GetCommentByIdAsync(id)).PostId;
+            await _commentService.LikePost(id, userId);
+            return RedirectToAction("Details", "Posts", new { id = back});
+        }
+
+        [HttpGet("/DislikeComment/{id}")]
+        public async Task<IActionResult> DislikeComment(int id)
+        {
+            var userId = (await _userManager.GetUserAsync(User)).Id;
+            int back = (await _commentService.GetCommentByIdAsync(id)).PostId;
+            await _commentService.DislikePost(id, userId);
+            return RedirectToAction("Details", "Posts", new { id = back });
+        }
         public IActionResult Create()
         {
             return View();
@@ -54,19 +81,20 @@ namespace Loquit.Web.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Text,TimeOfCommenting,IsEdited,Id")] Comment comment)
+        public async Task<IActionResult> Create(CommentDTO comment)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(comment);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                comment.TimeOfCommenting = DateTime.Now;
+                comment.Commenter = await _userManager.GetUserAsync(User);
+                await _commentService.AddCommentAsync(comment);
+                return RedirectToAction("Details", "Posts", new { id = comment.PostId });
             }
             return View(comment);
         }
 
         // GET: Comments/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        /*public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
             {
@@ -79,12 +107,12 @@ namespace Loquit.Web.Controllers
                 return NotFound();
             }
             return View(comment);
-        }
+        }*/
 
         // POST: Comments/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
+        /*[HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Text,TimeOfCommenting,IsEdited,Id")] Comment comment)
         {
@@ -115,7 +143,7 @@ namespace Loquit.Web.Controllers
             }
             return View(comment);
         }
-
+        */
         // GET: Comments/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
@@ -124,16 +152,15 @@ namespace Loquit.Web.Controllers
                 return NotFound();
             }
 
-            var comment = await _context.Comments
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (comment == null)
+            var post = await _commentService.GetCommentByIdAsync(id.Value);
+            if (post == null)
             {
                 return NotFound();
             }
-
-            return View(comment);
+            await _commentService.DeleteCommentByIdAsync(post.Id);
+            return RedirectToAction("Details", "Posts", new { id = post.PostId});
         }
-
+        /*
         // POST: Comments/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
@@ -152,6 +179,6 @@ namespace Loquit.Web.Controllers
         private bool CommentExists(int id)
         {
             return _context.Comments.Any(e => e.Id == id);
-        }
+        }*/
     }
 }

@@ -12,18 +12,22 @@ using Loquit.Utils;
 using Microsoft.Extensions.Hosting;
 using Loquit.Services.Abstractions;
 using Microsoft.AspNetCore.Identity;
+using Loquit.Services.DTOs;
 
 namespace Loquit.Web.Controllers
 {
+
     public class PostsController : Controller
     {
         private readonly IPostService _postService;
+        private readonly ICommentService _commentService;
         private readonly UserManager<AppUser> _userManager;
         private readonly IWebHostEnvironment _environment;
 
-        public PostsController(IPostService postService, IWebHostEnvironment environment, UserManager<AppUser> userManager)
+        public PostsController(IPostService postService, IWebHostEnvironment environment, ICommentService commentService, UserManager<AppUser> userManager)
         {
             _postService = postService;
+            _commentService = commentService;
             _environment = environment;
             _userManager = userManager;
         }
@@ -104,28 +108,32 @@ namespace Loquit.Web.Controllers
         }
 
         // GET: Posts/Edit/5
-        /*public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var post = await _context.Posts.FindAsync(id);
-            if (post == null)
-            {
-                return NotFound();
-            }
-            ViewData["CreatorId"] = new SelectList(_context.Set<AppUser>(), "Id", "Id", post.CreatorId);
-            return View(post);
-        }*/
+            PostDTO post = await _postService.GetPostByIdAsync(id.Value);
 
-        // POST: Posts/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        /*[HttpPost]
+            var model = new PostCreateViewModel()
+            {
+                Title = post.Title,
+                BodyText = post.BodyText,
+                PictureUrl = post.PictureUrl,
+                IsSpoiler = post.IsSpoiler,
+                IsNsfw = post.IsNsfw,
+                CreatorId = post.CreatorId,
+            };
+
+            return View(model);
+        }
+
+
+        [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Title,BodyText,PictureUrl,CreatorId,TimeOfPosting,Likes,Dislikes,CategoryId,Evaluations,IsSpoiler,IsNsfw,IsEdited,Id")] Post post)
+        public async Task<IActionResult> Edit(int id, PostCreateViewModel post)
         {
             if (id != post.Id)
             {
@@ -134,14 +142,23 @@ namespace Loquit.Web.Controllers
 
             if (ModelState.IsValid)
             {
+                if (post.Picture != null && post.Picture.Length > 0)
+                {
+                    var newFileName = await FileUpload.UploadAsync(post.Picture, _environment.WebRootPath);
+                    post.PictureUrl = newFileName;
+                }
+                else
+                {
+
+                }
+                post.IsEdited = true;
                 try
                 {
-                    _context.Update(post);
-                    await _context.SaveChangesAsync();
+                    await _postService.UpdatePostAsync(post);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!PostExists(post.Id))
+                    if (!await PostExists(post.Id))
                     {
                         return NotFound();
                     }
@@ -150,11 +167,10 @@ namespace Loquit.Web.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Details", "Posts", new { id = id });
             }
-            ViewData["CreatorId"] = new SelectList(_context.Set<AppUser>(), "Id", "Id", post.CreatorId);
             return View(post);
-        }*/
+        }
 
         // GET: Posts/Delete/5
         public async Task<IActionResult> Delete(int? id)
@@ -169,12 +185,12 @@ namespace Loquit.Web.Controllers
             {
                 return NotFound();
             }
-
-            return View(post);
+            await _postService.DeletePostByIdAsync(post.Id);
+            return RedirectToAction("Index", "Home");
         }
 
         // POST: Posts/Delete/5
-        [HttpPost, ActionName("Delete")]
+        /*[HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
@@ -185,7 +201,7 @@ namespace Loquit.Web.Controllers
             }
      
             return RedirectToAction(nameof(Index));
-        }
+        }*/
 
         private async Task<bool> PostExists(int id)
         {

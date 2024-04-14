@@ -53,7 +53,7 @@ namespace Loquit.Services.Services
 
         public async Task<List<PostDTO>> GetPostsWithTitleAsync(string title)
         {
-            var posts = (await _postRepository.GetAsync(item => item.Title == title))
+            var posts = (await _postRepository.GetAsync(item => item.Title.Contains(title)))
                 .ToList();
             return _mapper.Map<List<PostDTO>>(posts);
         }

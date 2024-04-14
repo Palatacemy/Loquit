@@ -30,13 +30,20 @@ body {
     background-attachment: fixed;
     background-size: cover;
     position: relative;
-    min-height: 87vh;
 }
 
 
 .navbar {
     background-color: var(--right) !important;
     border-bottom: solid var(--logoA) 2px;
+}
+
+.navbar-name {
+    color: var(--logoA);
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 5px;
+    margin-right: 20px
 }
 
 .nav-link {
@@ -60,10 +67,6 @@ label {
     color: var(--text);
 }
 
-.midder {
-    padding-bottom: 2.5rem;
-}
-
 .footer {
     position: absolute;
     bottom: 0;
@@ -82,6 +85,7 @@ label {
 .left-container {
     width: 75%;
     background-color: var(--left);
+    min-height: 100vh;
 }
 
 .lr-container-content {
@@ -96,7 +100,6 @@ label {
     border: solid var(--logoA) 2px;
     border-radius: 1rem 0 1rem 1rem;
     padding: 12px;
-    overflow: hidden;
 }
 
 .post-header {
@@ -269,6 +272,32 @@ button.show {
 
 .highlighted-button:focus {
     background-color: var(--logoA);
+}
+
+.warnings {
+    display: flex;
+    width: 100%
+}
+
+.spoiler {
+    color: var(--text);
+    font-style: italic;
+    font-weight: 600;
+}
+
+.nsfw {
+    color: var(--logoA);
+    font-weight: 600;
+    margin-left: 1rem;
+}
+
+.edited {
+    margin-left: 1rem;
+}
+
+.time-post {
+    margin-left: auto;
+    color: var(--text);
 }
 
 /* ------ right container ------ */
@@ -446,7 +475,6 @@ textarea.form-control {
     justify-content: center;
     flex-direction: column;
     max-width: 50rem;
-    overflow: hidden;
 }
 
 .comment-container {
@@ -495,4 +523,52 @@ textarea.form-control {
 
 .body-text {
     margin-bottom: 1%;
+    color: var(--text);
 }
+
+/* ------ Profile ------ */
+
+.profile {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-direction: column;
+    padding: 1rem;
+}
+
+.profile-user {
+    margin: auto 0;
+}
+
+.pfp-big {
+    width: 200px;
+    height: 200px;
+    align-content: center;
+    margin: auto;
+}
+
+.profile-name {
+    margin: 1rem auto;
+    font-weight: 700;
+    color: var(--text);
+    font-size: 3rem;
+}
+
+.qualities {
+    margin: 0 auto 1rem;
+    min-width: 50%;
+    color: var(--text)
+}
+
+.qualities > li {
+    display: flex;
+    flex-direction: row;
+    font-size: 1.5rem;
+}
+
+.quality {
+    color: var(--logoA);
+    font-weight: 500;
+    margin-right: 20px;
+}
+

@@ -15,5 +15,7 @@ namespace Loquit.Services.Abstractions
         Task AddCommentAsync(CommentDTO comment);
         Task DeleteCommentByIdAsync(int id);
         Task UpdateCommentAsync(CommentDTO comment);
+        Task LikePost(int id, string userId);
+        Task DislikePost(int id, string userId);
     }
 }

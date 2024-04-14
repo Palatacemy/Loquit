@@ -1,87 +1,49 @@
-﻿@model Loquit.Services.DTOs.PostDTO
+﻿@model Loquit.Web.Models.PostCreateViewModel
 
 @{
     ViewData["Title"] = "Edit";
 }
 
-<h1>Edit</h1>
+<div class="form-container-content">
+    <div class="form-title">Edit Post</div>
+    <hr />
+    <div class="row">
 
-<h4>Post</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
+        <form asp-action="Edit" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Title" class="control-label"></label>
-                <input asp-for="Title" class="form-control" />
+                <input asp-for="Title" class="form-control" maxlength="200" />
                 <span asp-validation-for="Title" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="BodyText" class="control-label"></label>
-                <input asp-for="BodyText" class="form-control" />
+                <label asp-for="BodyText" class="control-label">Text</label>
+                <textarea oninput="auto_grow(this)" TextMode="MultiLine" asp-for="BodyText" class="form-control" maxlength="5000"></textarea>
                 <span asp-validation-for="BodyText" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="PictureUrl" class="control-label"></label>
-                <input asp-for="PictureUrl" class="form-control" />
-                <span asp-validation-for="PictureUrl" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="CreatorId" class="control-label"></label>
-                <select asp-for="CreatorId" class="form-control" asp-items="ViewBag.CreatorId"></select>
-                <span asp-validation-for="CreatorId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="TimeOfPosting" class="control-label"></label>
-                <input asp-for="TimeOfPosting" class="form-control" />
-                <span asp-validation-for="TimeOfPosting" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Likes" class="control-label"></label>
-                <input asp-for="Likes" class="form-control" />
-                <span asp-validation-for="Likes" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Dislikes" class="control-label"></label>
-                <input asp-for="Dislikes" class="form-control" />
-                <span asp-validation-for="Dislikes" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="CategoryId" class="control-label"></label>
-                <input asp-for="CategoryId" class="form-control" />
-                <span asp-validation-for="CategoryId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Evaluations" class="control-label"></label>
-                <input asp-for="Evaluations" class="form-control" />
-                <span asp-validation-for="Evaluations" class="text-danger"></span>
+                <input type="hidden" asp-for="PictureUrl" />
+                <label asp-for="Picture" class="control-label"></label>
+                <input asp-for="Picture" type="file" class="form-control-file" />
+                <span asp-validation-for="Picture" class="text-danger"></span>
             </div>
             <div class="form-group form-check">
                 <label class="form-check-label">
-                    <input class="form-check-input" asp-for="IsSpoiler" /> @Html.DisplayNameFor(model => model.IsSpoiler)
+                    <input class="form-check-input" asp-for="IsSpoiler" /> Spoiler
                 </label>
             </div>
             <div class="form-group form-check">
                 <label class="form-check-label">
-                    <input class="form-check-input" asp-for="IsNsfw" /> @Html.DisplayNameFor(model => model.IsNsfw)
+                    <input class="form-check-input" asp-for="IsNsfw" /> NSFW
                 </label>
             </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="IsEdited" /> @Html.DisplayNameFor(model => model.IsEdited)
-                </label>
-            </div>
-            <input type="hidden" asp-for="Id" />
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+            <input type="hidden" asp-for="CreatorId" />
+            <div class="form-group form-button">
+                <input type="submit" value="Edit" class="highlighted-button create-post-btn btn btn-primary" />
             </div>
         </form>
-    </div>
-</div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
+    </div>
 </div>
 
 @section Scripts {
