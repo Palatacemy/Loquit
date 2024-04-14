@@ -131,9 +131,11 @@
                     <img src="~/img/lens.png" class="btn-image" />
                 </button>
             </form>
+            @if(currentUser != null {
             <form class="d-flex justify-content-center flex-row">
                 <button asp-controller="Posts" asp-action="Create" type="submit" class="highlighted-button create-post-btn btn btn-primary">New Post</button>
             </form>
+            }
         </div>
     </div>
 </div>
