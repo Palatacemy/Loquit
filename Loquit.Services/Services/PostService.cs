@@ -58,49 +58,66 @@ namespace Loquit.Services.Services
             return _mapper.Map<List<PostDTO>>(posts);
         }
 
-        public async Task LikePost(int postId, string userId)
+        public async Task<string> LikePost(int postId, string userId)
         {
             var hasLike = await _likeRepository.GetAsync(item => item.PostId == postId && item.UserId == userId);
             if(hasLike.Count() == 0)
             {
+
                 var hasDislike = await _dislikeRepository.GetAsync(item => item.PostId == postId && item.UserId == userId);
-                if (hasDislike.Count() != 0)
-                {
-                    await _dislikeRepository.DeleteByIdAsync(hasDislike.First().Id);
-                }
                 var like = new Like()
                 {
                     UserId = userId,
                     PostId = postId
                 };
                 await _likeRepository.AddAsync(like);
+                if (hasDislike.Count() != 0)
+                {
+                    await _dislikeRepository.DeleteByIdAsync(hasDislike.First().Id);
+                    return "changed";
+                }
+                else
+                {
+                    
+                    return "added";
+                }                   
             }
             else
             {
                 await _likeRepository.DeleteByIdAsync(hasLike.First().Id);
+
+                return "removed";
             }
         }
 
-        public async Task DislikePost(int postId, string userId)
+        public async Task<string> DislikePost(int postId, string userId)
         {
             var hasDislike = await _dislikeRepository.GetAsync(item => item.PostId == postId && item.UserId == userId);
             if (hasDislike.Count() == 0)
             {
                 var hasLike = await _likeRepository.GetAsync(item => item.PostId == postId && item.UserId == userId);
-                if (hasLike.Count() != 0)
-                {
-                    await _likeRepository.DeleteByIdAsync(hasLike.First().Id);
-                }
-                var dislike = new Dislike()
+                var like = new Dislike()
                 {
                     UserId = userId,
                     PostId = postId
                 };
-                await _dislikeRepository.AddAsync(dislike);
+                await _dislikeRepository.AddAsync(like);
+                if (hasLike.Count() != 0)
+                {
+                    await _likeRepository.DeleteByIdAsync(hasLike.First().Id);
+                    return "changed";
+                }
+                else
+                {
+                    return "added";
+                }
+                
             }
             else
             {
                 await _dislikeRepository.DeleteByIdAsync(hasDislike.First().Id);
+
+                return "removed";
             }
 
         }

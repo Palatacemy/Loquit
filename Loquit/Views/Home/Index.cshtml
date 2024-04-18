@@ -29,45 +29,25 @@
                                 <div class="post-header-options d-flex justify-content-between flex-row gap-2">
                                     @if(currentUser != null)
                                     {
-                                        if (item.LikedBy.Any(el => el.UserId == currentUser.Id))
-                                        {
-                                            <a asp-action="Like" asp-controller="Posts" asp-route-id="@item.Id" class="post-header-option">
-                                                <img class="option like" src="~/img/LikeFull.png" loading="lazy" />
-                                                <div>@item.LikedBy.Count</div>
-                                            </a>
-                                        }
-                                        else
-                                        {
-                                            <a asp-action="Like" asp-controller="Posts" asp-route-id="@item.Id" class="post-header-option">
-                                                <img class="option like" src="~/img/Like.png" loading="lazy" />
-                                                <div>@item.LikedBy.Count</div>
-                                            </a>
-                                        }
-                                        if (item.DislikedBy.Any(el => el.UserId == currentUser.Id))
-                                        {
-                                            <a asp-action="Dislike" asp-controller="Posts" asp-route-id="@item.Id" class="post-header-option">
-                                                <img class="option dislike" src="~/img/LikeFull.png" loading="lazy" />
-                                                <div>@item.DislikedBy.Count</div>
-                                            </a>
-                                        }
-                                        else
-                                        {
-                                            <a asp-action="Dislike" asp-controller="Posts" asp-route-id="@item.Id" class="post-header-option">
-                                                <img class="option dislike" src="~/img/Like.png" loading="lazy" />
-                                                <div>@item.DislikedBy.Count</div>
-                                            </a>
-                                        }
+                                        <a href="javascript:void(0);" onclick="likePost(@item.Id, this)" class="post-header-option">
+                                            <img class="option like" src="@(item.LikedBy.Any(el => el.UserId == currentUser.Id) ? "/img/LikeFull.png" : "/img/Like.png")" loading="lazy" />
+                                            <div id="Like">@item.LikedBy.Count</div>
+                                        </a>
+                                        <a href="javascript:void(0);" onclick="dislikePost(@item.Id, this)" class="post-header-option">
+                                            <img class="option dislike" src="@(item.DislikedBy.Any(el => el.UserId == currentUser.Id) ? "/img/LikeFull.png" : "/img/Like.png")" loading="lazy" />
+                                            <div id="Dislike">@item.DislikedBy.Count</div>
+                                        </a>
                                         
                                     }
                                     else
                                     {
                                         <a class="post-header-option">
                                             <img class="option like" src="~/img/Like.png" loading="lazy" />
-                                            <div>@item.LikedBy.Count</div>
+                                            <div id="Like">@item.LikedBy.Count</div>
                                         </a>
                                         <a class="post-header-option">
                                             <img class="option dislike" src="~/img/Like.png" loading="lazy" />
-                                            <div>@item.DislikedBy.Count</div>
+                                            <div id="Dislike">@item.DislikedBy.Count</div>
                                         </a>
                                     }
 

@@ -38,22 +38,36 @@ namespace Loquit.Web.Controllers
             return View(await _postService.GetPostsAsync());
         }
 
-        [HttpGet("/Like/{id}")]
+        [HttpGet("/Posts/Like/{id}")]
         public async Task<IActionResult> Like(int id)
         {
             var userId = (await _userManager.GetUserAsync(User)).Id;
 
-            await _postService.LikePost(id, userId);
-            return RedirectToAction("Details", "Posts", new { id = id });
+            try
+            {
+                string result = await _postService.LikePost(id, userId);
+                return Json(new { success = true , result = result});
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, error = ex.Message });
+            }
         }
 
-        [HttpGet("/Dislike/{id}")]
+        [HttpGet("/Posts/Dislike/{id}")]
         public async Task<IActionResult> Dislike(int id)
         {
             var userId = (await _userManager.GetUserAsync(User)).Id;
 
-            await _postService.DislikePost(id, userId);
-            return RedirectToAction("Details", "Posts", new { id = id });
+            try
+            {
+                string result = await _postService.DislikePost(id, userId);
+                return Json(new { success = true, result = result });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, error = ex.Message });
+            }
         }
 
 

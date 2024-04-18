@@ -54,26 +54,36 @@ namespace Loquit.Web.Controllers
 
         // GET: Comments/Create
 
-        [HttpGet("/LikeComment/{id}")]
-        public async Task<IActionResult> LikeComment(int id)
+        [HttpGet("/Comments/Like/{id}")]
+        public async Task<IActionResult> Like(int id)
         {
             var userId = (await _userManager.GetUserAsync(User)).Id;
-            int back = (await _commentService.GetCommentByIdAsync(id)).PostId;
-            await _commentService.LikePost(id, userId);
-            return RedirectToAction("Details", "Posts", new { id = back});
+
+            try
+            {
+                string result = await _commentService.LikeComment(id, userId);
+                return Json(new { success = true, result = result });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, error = ex.Message });
+            }
         }
 
-        [HttpGet("/DislikeComment/{id}")]
-        public async Task<IActionResult> DislikeComment(int id)
+        [HttpGet("/Comments/Dislike/{id}")]
+        public async Task<IActionResult> Dislike(int id)
         {
             var userId = (await _userManager.GetUserAsync(User)).Id;
-            int back = (await _commentService.GetCommentByIdAsync(id)).PostId;
-            await _commentService.DislikePost(id, userId);
-            return RedirectToAction("Details", "Posts", new { id = back });
-        }
-        public IActionResult Create()
-        {
-            return View();
+
+            try
+            {
+                string result = await _commentService.DislikeComment(id, userId);
+                return Json(new { success = true, result = result });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, error = ex.Message });
+            }
         }
 
         // POST: Comments/Create
